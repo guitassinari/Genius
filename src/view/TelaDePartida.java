@@ -21,6 +21,7 @@ import javax.swing.SwingWorker;
 
 import controller.BotaoPressionadoPartidaAction;
 import controller.ControladorNovaPartida;
+import controller.EscAction;
 import model.Constante;
 import model.Cor;
 import model.Mensagem;
@@ -40,6 +41,7 @@ public class TelaDePartida extends JPanel {
 	private static final String BOTAO_AMARELO_SOLTO = "botao amarelo solto";
 	private static final String BOTAO_VERDE_PRESSIONADO = "botao verde pressionado";
 	private static final String BOTAO_VERDE_SOLTO = "botao verde solto";
+	private static final String ESC_PRESSIONADO = "esc pressionado";
 
 	private JanelaDeJogo janelaDeJogo;
 	private ControladorNovaPartida controladorPartida;
@@ -59,16 +61,21 @@ public class TelaDePartida extends JPanel {
 		inicializar();
 	}
 
-	public TelaDePartida(JanelaDeJogo janelaDeJogo) {
+	public TelaDePartida(JanelaDeJogo janelaDeJogo, ControladorNovaPartida controladorPartida) {
 		super();
 		this.janelaDeJogo = janelaDeJogo;
+		this.controladorPartida = controladorPartida;
 		inicializar();
 	}
 
 	// ----------------------------------------------------------- MÉTODOS GERAIS ------------------------------------------------
 
 	private void inicializar() {
-		controladorPartida = new ControladorNovaPartida(this);
+		if(controladorPartida == null){
+			controladorPartida = new ControladorNovaPartida(this);
+		} else {
+			controladorPartida.setConteudoJanelaNovaPartida(this);
+		}
 		setBackground(Cor.CINZA_ESCURO);
 		setLayout(new BorderLayout(0, 0));
 		criarBotoes();
@@ -86,6 +93,10 @@ public class TelaDePartida extends JPanel {
 			}
 		});
 		add(botaoComecar, BorderLayout.CENTER);
+		
+		getInputMap(Constante.QUANDO_JANELA_FOCADA).put(KeyStroke.getKeyStroke(Constante.ESC, 0, false),
+				ESC_PRESSIONADO);
+		getActionMap().put(ESC_PRESSIONADO, new EscAction(janelaDeJogo));
 	}
 	
 	private void criarBotoes() {
@@ -125,6 +136,7 @@ public class TelaDePartida extends JPanel {
 			}
 		});
 
+		//Comportamento das teclas do teclado
 		action = new BotaoPressionadoPartidaAction(botao, controladorPartida, this);
 		
 		getInputMap(Constante.QUANDO_JANELA_FOCADA).put(KeyStroke.getKeyStroke(teclaComportamento, 0, false),
@@ -173,10 +185,7 @@ public class TelaDePartida extends JPanel {
 
 			@Override
 			protected Void doInBackground() throws Exception {
-
-				
-				
-				
+					
 				for (Color corBotao : coresBotoes) {
 					
 					inicializarCoresBotoes();
@@ -203,12 +212,8 @@ public class TelaDePartida extends JPanel {
 					}
 				}
 				
-				
-
 				inicializarCoresBotoes();
 				
-				
-
 				return null;
 			}
 
@@ -216,12 +221,12 @@ public class TelaDePartida extends JPanel {
 		worker.execute();
 	}
 
-	public void mostrarMensagemSequenciaCorreta(){
-		JLabel msg = new JLabel(Mensagem.MSG_SEQUENCIA_CORRETA);
+	public void mostrarMensagem(String mensagem){
+		JLabel msg = new JLabel(mensagem);
 		JOptionPane.showMessageDialog(this, msg);
 		
 		try {
-			Thread.sleep(2000);
+			Thread.sleep(1000);
 		} catch (InterruptedException ex) {
 			Thread.currentThread().interrupt();
 		}

@@ -6,6 +6,7 @@ import model.Constante;
 import model.Mensagem;
 import controller.ControladorNovaPartida;
 import controller.EnterPressionadoInserirNomeAction;
+import controller.EscAction;
 import controller.LimiteCharCampoTexto;
 
 import java.awt.Color;
@@ -28,6 +29,7 @@ import java.awt.event.MouseEvent;
 public class TelaInserirNome extends JPanel {
 
 	private static final String ENTER_PRESSIONADO = "enter pressionado";
+	private static final String ESC_PRESSIONADO = "esc pressionado";
 
 	private JanelaDeJogo janelaDeJogo;
 	private ControladorNovaPartida controladorPartida;
@@ -91,6 +93,10 @@ public class TelaInserirNome extends JPanel {
 				}
 			}
 		});
+		
+		getInputMap(Constante.QUANDO_JANELA_FOCADA).put(KeyStroke.getKeyStroke(Constante.ESC, 0, false),
+				ESC_PRESSIONADO);
+		getActionMap().put(ESC_PRESSIONADO, new EscAction(janelaDeJogo));
 	
 		defineComportamentoTecla(Constante.QUANDO_JANELA_FOCADA, ENTER_PRESSIONADO, janelaDeJogo, Constante.ENTER, false);
 	}

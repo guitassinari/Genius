@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class Partida implements Serializable {
+public class Partida implements Serializable, Comparable<Partida> {
 
 	
 	/**
@@ -61,6 +61,17 @@ public class Partida implements Serializable {
 
 	public void setNrPontos(Long nrPontos) {
 		this.nrPontos = nrPontos;
+	}
+
+	@Override
+	public int compareTo(Partida o) {
+		if(this.nrPontos < o.getNrPontos()){
+			return 1;
+		}
+		if(this.nrPontos > o.getNrPontos()){
+			return -1;
+		}
+		return 0;
 	}
 
 }

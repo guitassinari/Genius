@@ -29,9 +29,9 @@ public class BotaoPressionadoMenuAction extends AbstractAction {
 		if(cor.equals(Cor.VERMELHO)){	
 			janelaDeJogo.fecharJogo();
 		} else if (cor.equals(Cor.AMARELO)){
-			
+			janelaDeJogo.mostrarHelp();
 		} else if (cor.equals(Cor.AZUL)){
-			
+			janelaDeJogo.mostrarRanking();
 		} else if (cor.equals(Cor.VERDE)){
 			janelaDeJogo.mostrarInserirNome();
 		}

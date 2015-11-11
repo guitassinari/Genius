@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import model.Constante;
@@ -20,13 +21,13 @@ public class ControladorRanking {
 	
 	public ControladorRanking() {
 		super();
-		lerTopCincoDoArquivo();
+		lerRankingDoArquivo();
 	}
 	
 // ----------------------------------------------------	MÉTODOS GERAIS -----------------------------------
 	
 
-	private void escreverTopCincoNoArquivo(){
+	private void escreverRankingNoArquivo(){
 		
 		FileOutputStream arquivoRanking;
 		try {
@@ -49,21 +50,27 @@ public class ControladorRanking {
 		
 	}
 	
-	private void lerTopCincoDoArquivo(){
+	private void lerRankingDoArquivo(){
 		
 		FileInputStream arquivoRanking;
 		
 		try {
 			arquivoRanking = new FileInputStream(CAMINHO_ARQUIVO);
 			
-			if(arquivoRanking.read() != -1){		
 				ObjectInputStream leitorDeObjetos = new ObjectInputStream(arquivoRanking);
 				Object objeto = leitorDeObjetos.readObject();
-				ranking = (ArrayList<Partida>)objeto;
+				Object[] arrayObjetos = (Object[])objeto;
+				
+				ranking = new ArrayList<Partida>();
+				for(Object obj : arrayObjetos){
+					Partida novaPartida = (Partida)obj;
+					ranking.add(novaPartida);
+				}
 				leitorDeObjetos.close();
-			}
 			
 			arquivoRanking.close();
+			
+			Collections.sort(ranking);
 		} catch (FileNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -80,7 +87,7 @@ public class ControladorRanking {
 	public void addPartidaTopCinco(Partida novaPartida){
 		
 		 
-		 lerTopCincoDoArquivo();
+		 lerRankingDoArquivo();
 		 
 		 if(ranking != null){
 			 boolean novaPartidaEhTopCinco = false;
@@ -105,16 +112,16 @@ public class ControladorRanking {
 			 ranking.add(novaPartida);
 		 }
 		 
-		 escreverTopCincoNoArquivo();
+		 escreverRankingNoArquivo();
 	}
 	
 // ---------------------------------------------------- GETTERS E SETTERS --------------------------------
 	
-	public List<Partida> getTopCinco() {
+	public List<Partida> getRanking() {
 		return ranking;
 	}
 
-	public void setTopCinco(List<Partida> topCinco) {
+	public void setRanking(List<Partida> topCinco) {
 		this.ranking = topCinco;
 	}
 }

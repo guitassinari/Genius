@@ -67,7 +67,13 @@ public class JanelaDeJogo {
 		limparConteudoJanela();
 		Partida partida = new Partida(nmJogador);
 		ControladorNovaPartida controladorNovaPartida = new ControladorNovaPartida(partida);
-		frame.setContentPane(new TelaDePartida(this));
+		frame.setContentPane(new TelaDePartida(this, controladorNovaPartida));
+		redesenharConteudoJanela();
+	}
+	
+	public void mostrarHelp(){
+		limparConteudoJanela();
+		frame.setContentPane(new TelaHelp(this));
 		redesenharConteudoJanela();
 	}
 
@@ -77,6 +83,12 @@ public class JanelaDeJogo {
 		redesenharConteudoJanela();
 	}
 
+	public void mostrarRanking(){
+		limparConteudoJanela();
+		frame.setContentPane(new TelaRanking(this));
+		redesenharConteudoJanela();
+	}
+	
 	public void limparConteudoJanela() {
 		frame.getContentPane().removeAll();
 	}

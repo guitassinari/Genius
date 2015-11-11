@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Random;
 
 import model.Cor;
+import model.Mensagem;
 import model.Partida;
 import view.TelaDePartida;
 
@@ -74,11 +75,12 @@ public class ControladorNovaPartida {
 		if(corPressionada.equals(corCorrespondenteSequenciaPartida)){
 			if(tamanhoSequenciaCoresPressionadas == sequenciaCoresPartida.size()){
 				partida.incrementarNrPontos();
-				telaDePartida.mostrarMensagemSequenciaCorreta();
+				telaDePartida.mostrarMensagem(Mensagem.MSG_SEQUENCIA_CORRETA);
 				comecarNovaJogada();
 			}
 		} else {
 			//Se errou, termina a partida
+			telaDePartida.mostrarMensagem(Mensagem.MSG_SEQUENCIA_INCORRETA);
 			fimDePartida();
 		}
 		
