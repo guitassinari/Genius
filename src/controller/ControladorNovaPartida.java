@@ -85,16 +85,18 @@ public class ControladorNovaPartida {
 		int tamanhoSequenciaCoresPressionadas = sequenciaCoresPressionadas.size();
 		Color corCorrespondenteSequenciaPartida = sequenciaCoresPartida.get(tamanhoSequenciaCoresPressionadas-1);
 		
-		if(corPressionada.equals(corCorrespondenteSequenciaPartida)){
-			if(tamanhoSequenciaCoresPressionadas == sequenciaCoresPartida.size()){
-				partida.incrementarNrPontos();
-				telaDePartida.mostrarMensagem(Mensagem.MSG_SEQUENCIA_CORRETA);
-				comecarNovaJogada();
+		if(tamanhoSequenciaCoresPressionadas <= sequenciaCoresPartida.size()){
+			if(corPressionada.equals(corCorrespondenteSequenciaPartida)){
+				if(tamanhoSequenciaCoresPressionadas == sequenciaCoresPartida.size()){
+					partida.incrementarNrPontos();
+					telaDePartida.mostrarMensagem(Mensagem.MSG_SEQUENCIA_CORRETA);
+					comecarNovaJogada();
+				}
+			} else {
+				//Se errou, termina a partida
+				telaDePartida.mostrarMensagem(Mensagem.MSG_SEQUENCIA_INCORRETA);
+				fimDePartida();
 			}
-		} else {
-			//Se errou, termina a partida
-			telaDePartida.mostrarMensagem(Mensagem.MSG_SEQUENCIA_INCORRETA);
-			fimDePartida();
 		}
 		
 	}
