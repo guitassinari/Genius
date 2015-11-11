@@ -10,6 +10,19 @@ import model.Mensagem;
 import model.Partida;
 import view.TelaDePartida;
 
+/**
+ * 
+ * Esta classe executará toda e qualquer operação que não envolva DIRETAMENTE alguma resposta visual ao usuário.
+ * Toda e qualquer manipulação de objetos, modelos e funcionamento da partida será tratado aqui.
+ * Respostas visuais serão tratadas pela classe TelaDePartida e poderão ser chamadas indiretamente por esta classe.
+ *
+ *
+ * @see TelaDePartida
+ * 
+ * @param sequenciaCoresPartida	sequencia de cores que o usuario deve seguir para continuar a partida. Gerada randomicamente.
+ * @param sequenciaCoresPressionadas sequencia de cores pressionadas pelo usuário na rodada atual
+ * @param partida objeto que guardará os dados desta partida para serem salvos no ranking (nome, data e pontuação)
+ */
 public class ControladorNovaPartida {
 
 	// ------------------------------------------ ATRIBUTOS ---------------------------------------------------------
@@ -88,7 +101,7 @@ public class ControladorNovaPartida {
 	
 	public void fimDePartida(){
 		ControladorRanking controladorRanking = new ControladorRanking();
-		controladorRanking.addPartidaTopCinco(this.partida);
+		controladorRanking.addPartidaRanking(this.partida);
 	}
 	
 	public void addCorSequenciaPartida() {

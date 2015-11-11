@@ -13,6 +13,14 @@ import java.util.List;
 import model.Constante;
 import model.Partida;
 
+/**
+ * 
+ * Classe responsavel por manipular o ranking e sua leitura e escrita em arquivo externo.
+ * 
+ * @param ranking lista com os atuais melhores. Limite de partidas listadas é definido pela constante MAX_RANKING : {@link Constante#MAX_RANKING} 
+ * @param CAMINHO_ARQUIVO caminho do arquivo a ser editado, lido e escrito.
+ */
+
 public class ControladorRanking {
 
 	private List<Partida> ranking;
@@ -27,6 +35,9 @@ public class ControladorRanking {
 // ----------------------------------------------------	MÉTODOS GERAIS -----------------------------------
 	
 
+	/**
+	 * Escreve o ranking atual no arquivo.
+	 */
 	private void escreverRankingNoArquivo(){
 		
 		FileOutputStream arquivoRanking;
@@ -50,6 +61,9 @@ public class ControladorRanking {
 		
 	}
 	
+	/**
+	 * Le o ranking atual do arquivo e ordena por pontuação
+	 */
 	private void lerRankingDoArquivo(){
 		
 		FileInputStream arquivoRanking;
@@ -84,9 +98,15 @@ public class ControladorRanking {
 		
 	}
 	
-	public void addPartidaTopCinco(Partida novaPartida){
+	
+	/**
+	 * Método que testa se uma partida esta entre os tops e, se estiver, adiciona ao ranking, já escrevendo no arquivo
+	 * 
+	 * @param novaPartida partida a ser inserida no ranking, se for o caso
+	 *
+	 */
+	public void addPartidaRanking(Partida novaPartida){
 		
-		 
 		 lerRankingDoArquivo();
 		 
 		 if(ranking != null){

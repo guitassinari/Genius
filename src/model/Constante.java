@@ -4,6 +4,12 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.JComponent;
 
+/**
+ * 
+ * Classe com diversas constantes int. Em grande maioria, numeros que correspondem à teclas do teclado
+ *
+ */
+
 public final class Constante {
 	public static final int SETA_CIMA = KeyEvent.VK_UP;
 	public static final int SETA_DIREITA = KeyEvent.VK_RIGHT;

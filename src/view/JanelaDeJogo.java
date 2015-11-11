@@ -16,6 +16,13 @@ import controller.ControladorNovaPartida;
 import controller.Principal;
 import model.Partida;
 
+/**
+ * 
+ * Principal Classe do jogo. Representa a janela/viewport onde se encontra o jogo. 
+ * Nela são mostradas todas as telas, como o menu, partida, ranking e help.
+ *
+ */
+
 public class JanelaDeJogo {
 
 	private JFrame frame;
@@ -45,7 +52,6 @@ public class JanelaDeJogo {
 
 	public void inicializar() {
 		frame = new JFrame();
-		criarPainelDeVidro();
 		limparConteudoJanela();
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -63,6 +69,11 @@ public class JanelaDeJogo {
 		redesenharConteudoJanela();
 	}
 
+	/**
+	 * Abre a tela de partida
+	 * 
+	 * @param nmJogador nome do jogador que está jogando atualmente. Recebe de TelaInserirNome e seta num objeto Partida dentro de um ControladorPartida
+	 */
 	public void mostrarNovaPartida(String nmJogador) {
 		limparConteudoJanela();
 		Partida partida = new Partida(nmJogador);
@@ -98,19 +109,6 @@ public class JanelaDeJogo {
 		frame.getContentPane().repaint();
 	}
 	
-	private void criarPainelDeVidro(){
-		JPanel glass = new JPanel(new GridLayout(0, 1));
-		JLabel padding = new JLabel();
-		glass.setBackground(new Color(0,0,0,0));
-	    glass.add(padding);
-	    glass.addMouseListener(new MouseAdapter() {});
-	    glass.addMouseMotionListener(new MouseMotionAdapter() {});
-	    glass.addKeyListener(new KeyAdapter() {});
-	    glass.setFocusCycleRoot(true);  // 1.4
-	   // padding.setNextFocusableComponent(padding); 
-	    frame.setGlassPane(glass);
-	}
-
 	public void desbloquearJanela(){
 		frame.getGlassPane().setVisible(false);
 	}

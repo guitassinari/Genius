@@ -30,9 +30,21 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
-
+/**
+ * 
+ * Tela de execução de jogo. Aqui é feita a real interação com o jogador e a partida é realizada. Nenhuma real manipulação de objetos
+ * ou operações complexas são realizadas aqui. O objetivo da classe é prover respostas e interações VISUAIS com o usuario. Outras operações
+ * são realizadas no ControladorDePartida
+ * 
+ * @see ControladorDePartida
+ *
+ */
 public class TelaDePartida extends JPanel {
 
+	
+	/**
+	 * Strings de mapeamento utilizadas para o controle das teclas do teclado
+	 */
 	private static final String BOTAO_VERMELHO_PRESSIONADO = "botao vermelho pressionado";
 	private static final String BOTAO_VERMELHO_SOLTO = "botao vermelho solto";
 	private static final String BOTAO_AZUL_PRESSIONADO = "botao azulpressionado";
@@ -71,11 +83,13 @@ public class TelaDePartida extends JPanel {
 	// ----------------------------------------------------------- MÉTODOS GERAIS ------------------------------------------------
 
 	private void inicializar() {
+		
 		if(controladorPartida == null){
 			controladorPartida = new ControladorNovaPartida(this);
 		} else {
 			controladorPartida.setConteudoJanelaNovaPartida(this);
 		}
+		
 		setBackground(Cor.CINZA_ESCURO);
 		setLayout(new BorderLayout(0, 0));
 		criarBotoes();
@@ -94,6 +108,7 @@ public class TelaDePartida extends JPanel {
 		});
 		add(botaoComecar, BorderLayout.CENTER);
 		
+		//Comportamento do ESC
 		getInputMap(Constante.QUANDO_JANELA_FOCADA).put(KeyStroke.getKeyStroke(Constante.ESC, 0, false),
 				ESC_PRESSIONADO);
 		getActionMap().put(ESC_PRESSIONADO, new EscAction(janelaDeJogo));
@@ -115,6 +130,19 @@ public class TelaDePartida extends JPanel {
 		// --------------------------------------------------------------------------------------------------------------------------
 	}
 
+	/**
+	 * 
+	 * cria e adiciona um botao à tela, com cor e comportamentos
+	 * 
+	 * @param dimensoes tamanho do botao, num objeto Rectangle respectivamente: deslocamento x, deslocamento y, comprimento, altura.
+	 * @param corBotaoPadrao cor padrao que o botao deve apresentar quando ocioso
+	 * @param corBotaoPressionado cor que o botao deve apresentar como resposta ao usuario quando for pressionada
+	 * @param posicao Posicao do botao no layout BorderLayout : NORTE, SUL, LESTE, OESTE ou CENTRO
+	 * @param teclaComportamento tecla a ser pressionada para executar a acao do botao
+	 * @param stringMapeamento string de mapeamento com a Action
+	 * @param action Classe que deve ser executada quando o botao for clicado
+	 * @return Referencia ao botao criado
+	 */
 	private Canvas criarBotao(Rectangle dimensoes, Color corBotaoPadrao, Color corBotaoPressionado, String posicao,
 			int teclaComportamento, String stringMapeamento, BotaoPressionadoPartidaAction action) {
 		Canvas botao = new Canvas();
@@ -155,6 +183,12 @@ public class TelaDePartida extends JPanel {
 		botaoAzul.setBackground(Cor.AZUL);
 	}
 	
+	/**
+	 * Pisca o botao (Canvas) com a cor passada por parametro
+	 * 
+	 * @param botao botao a ser piscado
+	 * @param cor cor para se piscar o botao
+	 */
 	public void piscarBotao(Canvas botao, Color cor) {
 
 		SwingWorker worker = new SwingWorker() {
@@ -179,6 +213,11 @@ public class TelaDePartida extends JPanel {
 		worker.execute();
 	}
 
+	/**
+	 * Recebe uma lista de cores e pisca os botoes que possuem estas respectivas cores na ordem da lista
+	 * 
+	 * @param coresBotoes lista com as cores a serem piscadas
+	 */
 	public void piscarSequenciaBotoes(List<Color> coresBotoes) {
 
 		SwingWorker worker = new SwingWorker() {
@@ -221,6 +260,11 @@ public class TelaDePartida extends JPanel {
 		worker.execute();
 	}
 
+	/**
+	 * Mostra na tela uma mensagem definida por parametro
+	 *
+	 * @param mensagem String contendo a mensagem a ser exibida
+	 */
 	public void mostrarMensagem(String mensagem){
 		JLabel msg = new JLabel(mensagem);
 		JOptionPane.showMessageDialog(this, msg);

@@ -7,25 +7,35 @@ import javax.swing.AbstractAction;
 import view.TelaInserirNome;
 import view.JanelaDeJogo;
 
+/**
+ * 
+ * Define o comportamento da tecla ENTER ao ser pressionada na TelaInserirNome, ocasionando o começo de uma nova partida
+ *
+ *
+ */
+
 public class EnterPressionadoInserirNomeAction extends AbstractAction {
 
 	private JanelaDeJogo janelaDeJogo;
-	private TelaInserirNome conteudoJanelaInserirNome;
+	private TelaInserirNome telaInserirNome;
 
 	public EnterPressionadoInserirNomeAction(JanelaDeJogo janelaDeJogo, TelaInserirNome conteudoJanelaInserirNome) {
 		super();
 		this.janelaDeJogo = janelaDeJogo;
-		this.conteudoJanelaInserirNome = conteudoJanelaInserirNome;
+		this.telaInserirNome = conteudoJanelaInserirNome;
 	}
 
+	/**
+	 * Trata o nome e, se for o caso, inicia uma nova partida. Evita que o nome esteja vazio
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-		if (!conteudoJanelaInserirNome.nomeVazio()) {
-			String nomeJogador = conteudoJanelaInserirNome.getNmJogador().getText();
-			janelaDeJogo.mostrarNovaPartida(nomeJogador);
+		if (telaInserirNome.nomeVazio()) {
+			telaInserirNome.mostraMensagemNomeVazio();
 		} else {
-			conteudoJanelaInserirNome.mostraMensagemNomeVazio();
+			String nomeJogador = telaInserirNome.getNmJogador().getText();
+			janelaDeJogo.mostrarNovaPartida(nomeJogador);
 		}
 
 	}
@@ -39,11 +49,11 @@ public class EnterPressionadoInserirNomeAction extends AbstractAction {
 	}
 
 	public TelaInserirNome getConteudoJanelaInserirNome() {
-		return conteudoJanelaInserirNome;
+		return telaInserirNome;
 	}
 
 	public void setConteudoJanelaInserirNome(TelaInserirNome conteudoJanelaInserirNome) {
-		this.conteudoJanelaInserirNome = conteudoJanelaInserirNome;
+		this.telaInserirNome = conteudoJanelaInserirNome;
 	}
 
 }

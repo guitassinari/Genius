@@ -1,5 +1,11 @@
 package model;
 
+/**
+ * 
+ * Mensagens que são mostradas ao usuario, ou utilizadas com labels em alguns botoes
+ *
+ */
+
 public final class Mensagem {
 	public static final String MSG_NOME_VAZIO = "Insira seu nome!";
 	public static final String MSG_INICIAR_PARTIDA = "INICIAR PARTIDA";

@@ -6,6 +6,12 @@ import javax.swing.AbstractAction;
 
 import view.JanelaDeJogo;
 
+/**
+ * 
+ * Define o comportamento da tecla ESC em todas as telas! Sempre que for pressionado, retorna ao menu principal.
+ *
+ */
+
 public class EscAction extends AbstractAction {
 
 	private JanelaDeJogo janelaDeJogo;

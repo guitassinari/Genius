@@ -9,11 +9,13 @@ import javax.swing.AbstractAction;
 import model.Cor;
 import view.JanelaDeJogo;
 
+/**
+ * 
+ * Classe que define o comportamento de teclas do teclado ao serem pressionadas 
+ * 
+ */
 public class BotaoPressionadoMenuAction extends AbstractAction {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private Color cor;
 	private JanelaDeJogo janelaDeJogo;
@@ -24,6 +26,15 @@ public class BotaoPressionadoMenuAction extends AbstractAction {
 		this.janelaDeJogo = janelaDeJogo;
 	}
 
+	/**
+	 * Ação a ser tomada quando uma tecla for pressionada. Testará qual cor foi pressionada e abrirá a tela correspondente:
+	 * 
+	 * 	AMARELO	:	Help
+	 * 	AZUL 	: 	Ranking
+	 * 	VERMELHO:	Fecha Janela
+	 * 	VERDE	:	Inserir Nome(Começa fluxo de nova partida)
+	 * 	
+	 */
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		if(cor.equals(Cor.VERMELHO)){	

@@ -10,11 +10,13 @@ import model.Cor;
 import view.JanelaDeJogo;
 import view.TelaDePartida;
 
-public class BotaoPressionadoPartidaAction extends AbstractAction {
+/**
+ *
+ *	Classe que define o comportamento das teclas do teclado durante uma partida.
+ * 
+ */
+ public class BotaoPressionadoPartidaAction extends AbstractAction {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private Canvas botao;
 	private ControladorNovaPartida controladorNovaPartida;
@@ -27,6 +29,12 @@ public class BotaoPressionadoPartidaAction extends AbstractAction {
 		this.telaDePartida = telaDePartida;
 	}
 
+	/**
+	 * 
+	 * Testa as cores para saber qual botao foi clicado e, a partir disso, pisca o botao como resposta ao usuario e adiciona a cor à lista
+	 * de cores pressionadas pelo usuario nesta jogada.
+	 * 
+	 */
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		

@@ -4,6 +4,12 @@ import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
 
+/**
+ * 
+ * Classe auxiliar que limita o numero de caracteres de um campo de texto. Utilizado no nome do jogador em TelaInserirNome
+ *
+ */
+
 public class LimiteCharCampoTexto extends PlainDocument {
 
 	private static final long serialVersionUID = 1L;

@@ -26,6 +26,13 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * 
+ * Tela que lê o nome do jogador que quer jogar uma partida. Este nome será repassado à JanelaDeJogo e, caso não esteja vazio, será então
+ * repassado ao objeto Partida dentro do ControladorDePartida para posterior escrita no ranking através do ControladorRanking
+ *
+ */
+
 public class TelaInserirNome extends JPanel {
 
 	private static final String ENTER_PRESSIONADO = "enter pressionado";

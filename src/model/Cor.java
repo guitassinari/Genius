@@ -2,6 +2,12 @@ package model;
 
 import java.awt.Color;
 
+/**
+ * 
+ * Constantes de Cores que são utilizadas no código.
+ *
+ */
+
 public final class Cor {
 	public static final Color AMARELO = Color.YELLOW;
 	public static final Color AMARELO_BRILHANTE = new Color(255,255,100);

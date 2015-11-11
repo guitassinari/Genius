@@ -7,7 +7,11 @@ import javax.swing.KeyStroke;
 
 import controller.EscAction;
 import model.Constante;
-
+/**
+ * 
+ * Tela estatica que auxilia o usuario com informações básicas sobre o jogo e seu funcionamento
+ *
+ */
 public class TelaHelp extends JPanel {
 
 	private static final String ESC_PRESSIONADO = "esc pressionado";

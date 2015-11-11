@@ -4,12 +4,16 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * 
+ * Classe que modela uma partida. Utilizada para ser lida/escrita em arquivo externo contendo o ranking das melhores pontuações
+ * 
+ * 
+ *
+ */
+
 public class Partida implements Serializable, Comparable<Partida> {
 
-	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -7805659738830161851L;
 	private String nmJogador;
 	private Date dtPartida;
