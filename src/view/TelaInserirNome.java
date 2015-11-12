@@ -4,7 +4,7 @@ import javax.swing.JPanel;
 
 import model.Constante;
 import model.Mensagem;
-import controller.ControladorNovaPartida;
+import controller.ControladorPartida;
 import controller.EnterPressionadoInserirNomeAction;
 import controller.EscAction;
 import controller.LimiteCharCampoTexto;
@@ -33,20 +33,17 @@ import java.awt.event.MouseEvent;
  *
  */
 
-public class TelaInserirNome extends JPanel {
+public class TelaInserirNome extends Tela {
 
 	private static final String ENTER_PRESSIONADO = "enter pressionado";
 	private static final String ESC_PRESSIONADO = "esc pressionado";
 
-	private JanelaDeJogo janelaDeJogo;
-	private ControladorNovaPartida controladorPartida;
-	private JTextField nomeJogador;
+		private JTextField nomeJogador;
 
-	public TelaInserirNome(JanelaDeJogo janelaDeJogo, ControladorNovaPartida controladorPartida,
+	public TelaInserirNome(JanelaDeJogo janelaDeJogo,
 			JTextField nmJogador) {
 		super();
 		this.janelaDeJogo = janelaDeJogo;
-		this.controladorPartida = controladorPartida;
 		this.nomeJogador = nmJogador;
 		inicializar();
 	}
@@ -96,15 +93,10 @@ public class TelaInserirNome extends JPanel {
 				if (!nomeVazio()) {
 					janelaDeJogo.mostrarNovaPartida(nomeJogador.getText());
 				} else {
-					mostraMensagemNomeVazio();
+					mostraMensagem(Mensagem.MSG_NOME_VAZIO);
 				}
 			}
 		});
-		
-		getInputMap(Constante.QUANDO_JANELA_FOCADA).put(KeyStroke.getKeyStroke(Constante.ESC, 0, false),
-				ESC_PRESSIONADO);
-		getActionMap().put(ESC_PRESSIONADO, new EscAction(janelaDeJogo));
-	
 		defineComportamentoTecla(Constante.QUANDO_JANELA_FOCADA, ENTER_PRESSIONADO, janelaDeJogo, Constante.ENTER, false);
 	}
 
@@ -112,9 +104,6 @@ public class TelaInserirNome extends JPanel {
 		return nomeJogador.getText().length() < 1;
 	}
 
-	public void mostraMensagemNomeVazio() {
-		JOptionPane.showMessageDialog(nomeJogador, Mensagem.MSG_NOME_VAZIO);
-	}
 
 	public JanelaDeJogo getJanelaDeJogo() {
 		return janelaDeJogo;
@@ -122,14 +111,6 @@ public class TelaInserirNome extends JPanel {
 
 	public void setJanelaDeJogo(JanelaDeJogo janelaDeJogo) {
 		this.janelaDeJogo = janelaDeJogo;
-	}
-
-	public ControladorNovaPartida getControladorPartida() {
-		return controladorPartida;
-	}
-
-	public void setControladorPartida(ControladorNovaPartida controladorPartida) {
-		this.controladorPartida = controladorPartida;
 	}
 
 	public JTextField getNmJogador() {
@@ -143,6 +124,6 @@ public class TelaInserirNome extends JPanel {
 	private void defineComportamentoTecla(int tipoDeFoco ,String stringDeMapeamento, JanelaDeJogo janelaDeJogo, int tecla, boolean quandoTeclaSolto) {
 		getInputMap(tipoDeFoco).put(KeyStroke.getKeyStroke(tecla, 0, quandoTeclaSolto),
 				stringDeMapeamento);
-		getActionMap().put(stringDeMapeamento, new EnterPressionadoInserirNomeAction(janelaDeJogo, this));
+		getActionMap().put(stringDeMapeamento, new EnterPressionadoInserirNomeAction(this));
 	}
 }

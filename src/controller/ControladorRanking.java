@@ -25,7 +25,6 @@ public class ControladorRanking {
 
 	private List<Partida> ranking;
 	private static String CAMINHO_ARQUIVO = "C:\\Users\\Guilherme\\OneDrive\\Conhecimentos\\workspace\\Genius\\bin\\ranking.ser";
-
 	
 	public ControladorRanking() {
 		super();

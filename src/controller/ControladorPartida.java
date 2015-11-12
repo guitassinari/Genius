@@ -23,7 +23,7 @@ import view.TelaDePartida;
  * @param sequenciaCoresPressionadas sequencia de cores pressionadas pelo usuário na rodada atual
  * @param partida objeto que guardará os dados desta partida para serem salvos no ranking (nome, data e pontuação)
  */
-public class ControladorNovaPartida {
+public class ControladorPartida {
 
 	// ------------------------------------------ ATRIBUTOS ---------------------------------------------------------
 	
@@ -36,28 +36,21 @@ public class ControladorNovaPartida {
 	// ------------------------------------------ MÉTODOS CONSTRUTORES ---------------------------------------------
 	
 	
-	public ControladorNovaPartida(TelaDePartida conteudoJanelaNovaPartida) {
+	public ControladorPartida(TelaDePartida telaDePartida) {
 		super();
-		this.telaDePartida = conteudoJanelaNovaPartida;
+		this.telaDePartida = telaDePartida;
 		this.sequenciaCoresPartida = new ArrayList<Color>();
 		this.sequenciaCoresPressionadas = new ArrayList<Color>();
 		this.partida = new Partida();
 	}
-
-	public ControladorNovaPartida(List<Color> sequenciaCoresPartida, List<Color> sequenciaCoresPressionadas,
-			Partida partida, TelaDePartida conteudoJanelaNovaPartida) {
+	
+	public ControladorPartida(String nomeJogador, TelaDePartida telaDePartida){
 		super();
-		this.sequenciaCoresPartida = sequenciaCoresPartida;
-		this.sequenciaCoresPressionadas = sequenciaCoresPressionadas;
-		this.partida = partida;
-		this.telaDePartida = conteudoJanelaNovaPartida;
-	}
-
-	public ControladorNovaPartida(Partida partida) {
-		super();
-		this.partida = partida;
+		this.partida = new Partida(nomeJogador);
 		sequenciaCoresPartida = new ArrayList<Color>();
 		sequenciaCoresPressionadas = new ArrayList<Color>();
+		this.telaDePartida = telaDePartida;
+		
 	}
 	
 	
@@ -89,12 +82,12 @@ public class ControladorNovaPartida {
 			if(corPressionada.equals(corCorrespondenteSequenciaPartida)){
 				if(tamanhoSequenciaCoresPressionadas == sequenciaCoresPartida.size()){
 					partida.incrementarNrPontos();
-					telaDePartida.mostrarMensagem(Mensagem.MSG_SEQUENCIA_CORRETA);
+					telaDePartida.mostraMensagem(Mensagem.MSG_SEQUENCIA_CORRETA);
 					comecarNovaJogada();
 				}
 			} else {
 				//Se errou, termina a partida
-				telaDePartida.mostrarMensagem(Mensagem.MSG_SEQUENCIA_INCORRETA);
+				telaDePartida.mostraMensagem(Mensagem.MSG_SEQUENCIA_INCORRETA);
 				fimDePartida();
 			}
 		}

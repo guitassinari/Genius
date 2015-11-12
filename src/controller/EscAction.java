@@ -4,34 +4,35 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
 
-import view.JanelaDeJogo;
+import view.Tela;
 
 /**
  * 
- * Define o comportamento da tecla ESC em todas as telas! Sempre que for pressionado, retorna ao menu principal.
+ * Define o comportamento da tecla ESC em todas as telas! Sempre que for
+ * pressionado, retorna ao menu principal.
  *
  */
 
 public class EscAction extends AbstractAction {
 
-	private JanelaDeJogo janelaDeJogo;
+	private Tela tela;
 
-	public EscAction(JanelaDeJogo janelaDeJogo) {
+	public EscAction(Tela tela) {
 		super();
-		this.janelaDeJogo = janelaDeJogo;
+		this.tela = tela;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		janelaDeJogo.mostrarMenuPrincipal();
+		tela.mostrarMenuPrincipal();
 	}
 
-	public JanelaDeJogo getJanelaDeJogo() {
-		return janelaDeJogo;
+	public Tela getTela() {
+		return tela;
 	}
 
-	public void setJanelaDeJogo(JanelaDeJogo janelaDeJogo) {
-		this.janelaDeJogo = janelaDeJogo;
+	public void setTela(Tela tela) {
+		this.tela = tela;
 	}
 
 }

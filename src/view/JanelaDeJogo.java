@@ -12,7 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import controller.ControladorNovaPartida;
+import controller.ControladorPartida;
 import controller.Principal;
 import model.Partida;
 
@@ -50,7 +50,7 @@ public class JanelaDeJogo {
 		inicializar();
 	}
 
-	public void inicializar() {
+	private void inicializar() {
 		frame = new JFrame();
 		limparConteudoJanela();
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -59,7 +59,7 @@ public class JanelaDeJogo {
 		mostrarMenuPrincipal();
 	}
 
-	public void abrirJanela() {
+	private void abrirJanela() {
 		frame.setVisible(true);
 	}
 
@@ -74,11 +74,9 @@ public class JanelaDeJogo {
 	 * 
 	 * @param nmJogador nome do jogador que está jogando atualmente. Recebe de TelaInserirNome e seta num objeto Partida dentro de um ControladorPartida
 	 */
-	public void mostrarNovaPartida(String nmJogador) {
+	public void mostrarNovaPartida(String nomeJogador) {
 		limparConteudoJanela();
-		Partida partida = new Partida(nmJogador);
-		ControladorNovaPartida controladorNovaPartida = new ControladorNovaPartida(partida);
-		frame.setContentPane(new TelaDePartida(this, controladorNovaPartida));
+		frame.setContentPane(new TelaDePartida(this, nomeJogador));
 		redesenharConteudoJanela();
 	}
 	
@@ -100,21 +98,13 @@ public class JanelaDeJogo {
 		redesenharConteudoJanela();
 	}
 	
-	public void limparConteudoJanela() {
+	private void limparConteudoJanela() {
 		frame.getContentPane().removeAll();
 	}
 
-	public void redesenharConteudoJanela() {
+	private void redesenharConteudoJanela() {
 		frame.getContentPane().revalidate();
 		frame.getContentPane().repaint();
-	}
-	
-	public void desbloquearJanela(){
-		frame.getGlassPane().setVisible(false);
-	}
-	
-	public void bloquearJanela(){
-		frame.getGlassPane().setVisible(true);
 	}
 	
 	public void fecharJogo() {

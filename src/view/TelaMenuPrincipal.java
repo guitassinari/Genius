@@ -29,23 +29,13 @@ import controller.BotaoPressionadoMenuAction;
 import controller.EnterPressionadoInserirNomeAction;
 import controller.TocadorDeAudio;
 
-public class TelaMenuPrincipal extends JPanel {
+public class TelaMenuPrincipal extends Tela {
 
 	private static final String BOTAO_VERMELHO_PRESSIONADO = "botao vermelho pressionado";
-	private static final String BOTAO_VERMELHO_SOLTO = "botao vermelho solto";
 	private static final String BOTAO_AZUL_PRESSIONADO = "botao azulpressionado";
-	private static final String BOTAO_AZUL_SOLTO = "botao azul solto";
 	private static final String BOTAO_AMARELO_PRESSIONADO = "botao amarelo pressionado";
-	private static final String BOTAO_AMARELO_SOLTO = "botao amarelo solto";
 	private static final String BOTAO_VERDE_PRESSIONADO = "botao verde pressionado";
-	private static final String BOTAO_VERDE_SOLTO = "botao verde solto";
 	
-	private Canvas botaoAmarelo;
-	private Canvas botaoVermelho;
-	private Canvas botaoAzul;
-	private Canvas botaoVerde;
-	
-	private JanelaDeJogo janelaDeJogo;
 	
 	public TelaMenuPrincipal(JanelaDeJogo janelaDeJogo) {
 		super();
@@ -107,13 +97,13 @@ public class TelaMenuPrincipal extends JPanel {
 	
 	private void criarBotoes(){
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-		botaoVermelho = criarBotao(new Rectangle(0, 0, 200, 0), Cor.VERMELHO, Cor.VERMELHO_FOSCO, BorderLayout.WEST, Constante.SETA_ESQUERDA, BOTAO_VERMELHO_PRESSIONADO);	
+		Canvas botaoVermelho = criarBotao(new Rectangle(0, 0, 200, 0), Cor.VERMELHO, Cor.VERMELHO_FOSCO, BorderLayout.WEST, Constante.SETA_ESQUERDA, BOTAO_VERMELHO_PRESSIONADO);	
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-		botaoAmarelo = criarBotao(new Rectangle(0, 0, 200, 0), Cor.AMARELO, Cor.AMARELO_FOSCO, BorderLayout.EAST, Constante.SETA_DIREITA, BOTAO_AMARELO_PRESSIONADO);	
+		Canvas botaoAmarelo = criarBotao(new Rectangle(0, 0, 200, 0), Cor.AMARELO, Cor.AMARELO_FOSCO, BorderLayout.EAST, Constante.SETA_DIREITA, BOTAO_AMARELO_PRESSIONADO);	
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-		botaoAzul = criarBotao(new Rectangle(0, 0, 0, 200), Cor.VERDE, Cor.VERDE_FOSCO, BorderLayout.SOUTH, Constante.SETA_BAIXO, BOTAO_VERDE_PRESSIONADO);	
+		Canvas botaoVerde = criarBotao(new Rectangle(0, 0, 0, 200), Cor.VERDE, Cor.VERDE_FOSCO, BorderLayout.SOUTH, Constante.SETA_BAIXO, BOTAO_VERDE_PRESSIONADO);	
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-		botaoAzul = criarBotao(new Rectangle(0, 0, 0, 200), Cor.AZUL, Cor.AZUL_FOSCO, BorderLayout.NORTH, Constante.SETA_CIMA, BOTAO_AZUL_PRESSIONADO);
+		Canvas botaoAzul = criarBotao(new Rectangle(0, 0, 0, 200), Cor.AZUL, Cor.AZUL_FOSCO, BorderLayout.NORTH, Constante.SETA_CIMA, BOTAO_AZUL_PRESSIONADO);
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	}
 
@@ -175,7 +165,7 @@ public class TelaMenuPrincipal extends JPanel {
 	private void defineComportamentoTecla(int tipoDeFoco ,String stringDeMapeamento, JanelaDeJogo janelaDeJogo, int tecla, boolean quandoBotaoSolto, Color cor) {
 		getInputMap(tipoDeFoco).put(KeyStroke.getKeyStroke(tecla, 0, quandoBotaoSolto),
 				stringDeMapeamento);
-		getActionMap().put(stringDeMapeamento, new BotaoPressionadoMenuAction(cor, janelaDeJogo));
+		getActionMap().put(stringDeMapeamento, new BotaoPressionadoMenuAction(cor, this));
 	}
 
 }

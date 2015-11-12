@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
 
+import model.Mensagem;
 import view.TelaInserirNome;
 import view.JanelaDeJogo;
 
@@ -16,12 +17,10 @@ import view.JanelaDeJogo;
 
 public class EnterPressionadoInserirNomeAction extends AbstractAction {
 
-	private JanelaDeJogo janelaDeJogo;
 	private TelaInserirNome telaInserirNome;
 
-	public EnterPressionadoInserirNomeAction(JanelaDeJogo janelaDeJogo, TelaInserirNome conteudoJanelaInserirNome) {
+	public EnterPressionadoInserirNomeAction(TelaInserirNome conteudoJanelaInserirNome) {
 		super();
-		this.janelaDeJogo = janelaDeJogo;
 		this.telaInserirNome = conteudoJanelaInserirNome;
 	}
 
@@ -32,20 +31,12 @@ public class EnterPressionadoInserirNomeAction extends AbstractAction {
 	public void actionPerformed(ActionEvent e) {
 
 		if (telaInserirNome.nomeVazio()) {
-			telaInserirNome.mostraMensagemNomeVazio();
+			telaInserirNome.mostraMensagem(Mensagem.MSG_NOME_VAZIO);
 		} else {
 			String nomeJogador = telaInserirNome.getNmJogador().getText();
-			janelaDeJogo.mostrarNovaPartida(nomeJogador);
+			telaInserirNome.mostrarNovaPartida(nomeJogador);
 		}
 
-	}
-
-	public JanelaDeJogo getJanelaDeJogo() {
-		return janelaDeJogo;
-	}
-
-	public void setJanelaDeJogo(JanelaDeJogo janelaDeJogo) {
-		this.janelaDeJogo = janelaDeJogo;
 	}
 
 	public TelaInserirNome getConteudoJanelaInserirNome() {

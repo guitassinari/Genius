@@ -12,6 +12,7 @@ import javax.swing.AbstractAction;
 import model.Cor;
 import model.EfeitoSonoro;
 import view.JanelaDeJogo;
+import view.TelaMenuPrincipal;
 
 /**
  * 
@@ -22,12 +23,12 @@ public class BotaoPressionadoMenuAction extends AbstractAction {
 
 	private static final long serialVersionUID = 1L;
 	private Color cor;
-	private JanelaDeJogo janelaDeJogo;
+	private TelaMenuPrincipal telaMenuPrincipal;
 
-	public BotaoPressionadoMenuAction(Color cor, JanelaDeJogo janelaDeJogo) {
+	public BotaoPressionadoMenuAction(Color cor, TelaMenuPrincipal telaMenuPrincipal) {
 		super();
 		this.cor = cor;
-		this.janelaDeJogo = janelaDeJogo;
+		this.telaMenuPrincipal = telaMenuPrincipal;
 	}
 
 	/**
@@ -41,31 +42,24 @@ public class BotaoPressionadoMenuAction extends AbstractAction {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
+		TocadorDeAudio tocadorDeAudio = new TocadorDeAudio();
+		
 		if(cor.equals(Cor.VERMELHO)){
-			tocarSom(EfeitoSonoro.SOM_BOTAO_VERMELHO);
-			janelaDeJogo.fecharJogo();
+			tocadorDeAudio.setCaminhoDoAudio(EfeitoSonoro.SOM_BOTAO_VERMELHO);
+			telaMenuPrincipal.fecharJogo();
 		} else if (cor.equals(Cor.AMARELO)){
-			tocarSom(EfeitoSonoro.SOM_BOTAO_AMARELO);
-			janelaDeJogo.mostrarHelp();
+			tocadorDeAudio.setCaminhoDoAudio(EfeitoSonoro.SOM_BOTAO_AMARELO);
+			telaMenuPrincipal.mostrarHelp();
 		} else if (cor.equals(Cor.AZUL)){
-			tocarSom(EfeitoSonoro.SOM_BOTAO_AZUL);
-			janelaDeJogo.mostrarRanking();
+			tocadorDeAudio.setCaminhoDoAudio(EfeitoSonoro.SOM_BOTAO_AZUL);
+			telaMenuPrincipal.mostrarRanking();
 		} else if (cor.equals(Cor.VERDE)){
-			tocarSom(EfeitoSonoro.SOM_BOTAO_VERDE);
-			janelaDeJogo.mostrarInserirNome();
+			tocadorDeAudio.setCaminhoDoAudio(EfeitoSonoro.SOM_BOTAO_VERDE);
+			telaMenuPrincipal.mostrarInserirNome();
 		}
-	}
-	
-	private void tocarSom(String audio){
-		try{
-	        Clip clip = AudioSystem.getClip();
-	        clip.open(AudioSystem.getAudioInputStream(new File(audio)));
-	        clip.start();
-	        Thread.sleep(300);
-	        clip.close();
-		 } catch (Exception exc) {
-	        exc.printStackTrace(System.out);
-		 }
+		
+		Thread threadDeAudio = new Thread(tocadorDeAudio);
+		threadDeAudio.run();
 	}
 
 	public Color getCor() {
@@ -76,12 +70,12 @@ public class BotaoPressionadoMenuAction extends AbstractAction {
 		this.cor = cor;
 	}
 
-	public JanelaDeJogo getJanelaDeJogo() {
-		return janelaDeJogo;
+	public TelaMenuPrincipal getTelaMenuPrincipal() {
+		return telaMenuPrincipal;
 	}
 
-	public void setJanelaDeJogo(JanelaDeJogo janelaDeJogo) {
-		this.janelaDeJogo = janelaDeJogo;
+	public void setTelaMenuPrincipal(TelaMenuPrincipal telaMenuPrincipal) {
+		this.telaMenuPrincipal = telaMenuPrincipal;
 	}
 
 }
