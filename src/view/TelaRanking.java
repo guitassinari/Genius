@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Font;
 import java.util.List;
 
@@ -17,10 +18,9 @@ import model.Cor;
 import model.Mensagem;
 import model.Partida;
 
-public class TelaRanking extends JPanel {
+public class TelaRanking extends Tela {
 
 	private static final String ESC_PRESSIONADO = "esc pressionado";
-	private JanelaDeJogo janelaDeJogo;
 	private ControladorRanking controladorRanking;
 
 	public TelaRanking(JanelaDeJogo janelaDeJogo) {
@@ -54,23 +54,22 @@ public class TelaRanking extends JPanel {
 				JLabel label = new JLabel( (contadorLimite+1) + "\u00BA");
 				label.setBounds(112, deslocamentoVertical, 46, 50);
 				label.setFont(new Font("Segoe UI", Font.PLAIN, 25));
+				label.setForeground(Color.WHITE);
 				panel.add(label);
 				
 				JTextPane textPane = new JTextPane();
 				textPane.setBounds(140, deslocamentoVertical,800, 50);
 				textPane.setText(partida.getNmJogador() + " : " + partida.getNrPontos() + " pontos " + partida.getDtPartida().toString());
 				textPane.setFont(new Font("Segoe UI", Font.PLAIN, 25));
+				textPane.setEditable(false);
 				panel.add(textPane);
 				
 				deslocamentoVertical += 60;
 			} 
 		} else {
-			JOptionPane.showMessageDialog(this, Mensagem.MSG_RANKING_VAZIO);
+			mostraMensagem(Mensagem.MSG_RANKING_VAZIO);
 		}
 		
-		getInputMap(Constante.QUANDO_JANELA_FOCADA).put(KeyStroke.getKeyStroke(Constante.ESC, 0, false),
-				ESC_PRESSIONADO);
-		getActionMap().put(ESC_PRESSIONADO, new EscAction(janelaDeJogo));
 
 	}
 

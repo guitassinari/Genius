@@ -20,10 +20,12 @@ import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
 import controller.BotaoPressionadoPartidaAction;
-import controller.ControladorNovaPartida;
+import controller.ControladorPartida;
 import controller.EscAction;
+import controller.TocadorDeAudio;
 import model.Constante;
 import model.Cor;
+import model.EfeitoSonoro;
 import model.Mensagem;
 
 import javax.swing.JButton;
@@ -39,32 +41,23 @@ import java.awt.Font;
  * @see ControladorDePartida
  *
  */
-public class TelaDePartida extends JPanel {
+public class TelaDePartida extends Tela {
 
 	
 	/**
 	 * Strings de mapeamento utilizadas para o controle das teclas do teclado
 	 */
 	private static final String BOTAO_VERMELHO_PRESSIONADO = "botao vermelho pressionado";
-	private static final String BOTAO_VERMELHO_SOLTO = "botao vermelho solto";
 	private static final String BOTAO_AZUL_PRESSIONADO = "botao azulpressionado";
-	private static final String BOTAO_AZUL_SOLTO = "botao azul solto";
 	private static final String BOTAO_AMARELO_PRESSIONADO = "botao amarelo pressionado";
-	private static final String BOTAO_AMARELO_SOLTO = "botao amarelo solto";
 	private static final String BOTAO_VERDE_PRESSIONADO = "botao verde pressionado";
-	private static final String BOTAO_VERDE_SOLTO = "botao verde solto";
-	private static final String ESC_PRESSIONADO = "esc pressionado";
+	
 
-	private JanelaDeJogo janelaDeJogo;
-	private ControladorNovaPartida controladorPartida;
+	private ControladorPartida controladorPartida;
 	private Canvas botaoAzul;
 	private Canvas botaoAmarelo;
 	private Canvas botaoVermelho;
 	private Canvas botaoVerde;
-	private BotaoPressionadoPartidaAction actionBotaoAzul;
-	private BotaoPressionadoPartidaAction actionBotaoAmarelo;
-	private BotaoPressionadoPartidaAction actionBotaoVermelho;
-	private BotaoPressionadoPartidaAction actionBotaoVerde;
 
 	// ----------------------------------------------------------- CONSTRUTORES ---------------------------------------------------
 	
@@ -73,19 +66,21 @@ public class TelaDePartida extends JPanel {
 		inicializar();
 	}
 
-	public TelaDePartida(JanelaDeJogo janelaDeJogo, ControladorNovaPartida controladorPartida) {
+	public TelaDePartida(JanelaDeJogo janelaDeJogo, String nomeJogador) {
 		super();
 		this.janelaDeJogo = janelaDeJogo;
-		this.controladorPartida = controladorPartida;
+		this.controladorPartida = new ControladorPartida(nomeJogador, this);
 		inicializar();
 	}
+	
+
 
 	// ----------------------------------------------------------- MÉTODOS GERAIS ------------------------------------------------
 
 	private void inicializar() {
 		
 		if(controladorPartida == null){
-			controladorPartida = new ControladorNovaPartida(this);
+			controladorPartida = new ControladorPartida(this);
 		} else {
 			controladorPartida.setConteudoJanelaNovaPartida(this);
 		}
@@ -109,24 +104,22 @@ public class TelaDePartida extends JPanel {
 		add(botaoComecar, BorderLayout.CENTER);
 		
 		//Comportamento do ESC
-		getInputMap(Constante.QUANDO_JANELA_FOCADA).put(KeyStroke.getKeyStroke(Constante.ESC, 0, false),
-				ESC_PRESSIONADO);
-		getActionMap().put(ESC_PRESSIONADO, new EscAction(janelaDeJogo));
+		
 	}
 	
 	private void criarBotoes() {
 		// --------------------------------------------------------------------------------------------------------------
 		botaoVermelho = criarBotao(new Rectangle(0, 0, 200, 0), Cor.VERMELHO, Cor.VERMELHO_FOSCO, BorderLayout.WEST,
-				Constante.SETA_ESQUERDA, BOTAO_VERMELHO_PRESSIONADO, actionBotaoVermelho);
+				Constante.SETA_ESQUERDA, BOTAO_VERMELHO_PRESSIONADO);
 		// -------------------------------------------------------------------------------------------------------------------
 		botaoAmarelo = criarBotao(new Rectangle(0, 0, 200, 0), Cor.AMARELO, Cor.AMARELO_FOSCO, BorderLayout.EAST,
-				Constante.SETA_DIREITA, BOTAO_AMARELO_PRESSIONADO, actionBotaoAmarelo);
+				Constante.SETA_DIREITA, BOTAO_AMARELO_PRESSIONADO);
 		// ----------------------------------------------------------------------------------------------------------------------
 		botaoVerde = criarBotao(new Rectangle(0, 0, 0, 200), Cor.VERDE, Cor.VERDE_FOSCO, BorderLayout.SOUTH,
-				Constante.SETA_BAIXO, BOTAO_VERDE_PRESSIONADO, actionBotaoVerde);
+				Constante.SETA_BAIXO, BOTAO_VERDE_PRESSIONADO);
 		// -------------------------------------------------------------------------------------------------------------------------------------------------
 		botaoAzul = criarBotao(new Rectangle(0, 0, 0, 200), Cor.AZUL, Cor.AZUL_FOSCO, BorderLayout.NORTH,
-				Constante.SETA_CIMA, BOTAO_AZUL_PRESSIONADO, actionBotaoAzul);
+				Constante.SETA_CIMA, BOTAO_AZUL_PRESSIONADO);
 		// --------------------------------------------------------------------------------------------------------------------------
 	}
 
@@ -144,7 +137,7 @@ public class TelaDePartida extends JPanel {
 	 * @return Referencia ao botao criado
 	 */
 	private Canvas criarBotao(Rectangle dimensoes, Color corBotaoPadrao, Color corBotaoPressionado, String posicao,
-			int teclaComportamento, String stringMapeamento, BotaoPressionadoPartidaAction action) {
+			int teclaComportamento, String stringMapeamento) {
 		Canvas botao = new Canvas();
 		botao.setBounds(dimensoes);
 
@@ -160,12 +153,35 @@ public class TelaDePartida extends JPanel {
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				botao.setBackground(corBotaoPadrao);
+				
+				TocadorDeAudio tocadorDeAudio = new TocadorDeAudio();
+				String caminhoDoAudio;
+				
+				if(corBotaoPadrao.equals(Cor.AMARELO)){
+					janelaDeJogo.mostrarHelp();
+					caminhoDoAudio = EfeitoSonoro.SOM_BOTAO_AMARELO;
+				} else if(corBotaoPadrao.equals(Cor.AZUL)){
+					janelaDeJogo.mostrarRanking();
+					caminhoDoAudio = EfeitoSonoro.SOM_BOTAO_AZUL;
+				} else if(corBotaoPadrao.equals(Cor.VERDE)){
+					caminhoDoAudio = EfeitoSonoro.SOM_BOTAO_VERDE;
+					janelaDeJogo.mostrarInserirNome();
+				} else {
+					caminhoDoAudio = EfeitoSonoro.SOM_BOTAO_VERMELHO;
+					janelaDeJogo.fecharJogo();
+				}
+				
+				
+				tocadorDeAudio.setCaminhoDoAudio(caminhoDoAudio);
+				Thread threadDeAudio = new Thread(tocadorDeAudio);
+				threadDeAudio.run();
+				
 				controladorPartida.corPressionada(corBotaoPadrao);
 			}
 		});
 
 		//Comportamento das teclas do teclado
-		action = new BotaoPressionadoPartidaAction(botao, controladorPartida, this);
+		BotaoPressionadoPartidaAction action = new BotaoPressionadoPartidaAction(botao, controladorPartida, this);
 		
 		getInputMap(Constante.QUANDO_JANELA_FOCADA).put(KeyStroke.getKeyStroke(teclaComportamento, 0, false),
 				stringMapeamento);
@@ -260,26 +276,6 @@ public class TelaDePartida extends JPanel {
 		worker.execute();
 	}
 
-	/**
-	 * Mostra na tela uma mensagem definida por parametro
-	 *
-	 * @param mensagem String contendo a mensagem a ser exibida
-	 */
-	public void mostrarMensagem(String mensagem){
-		JLabel msg = new JLabel(mensagem);
-		JOptionPane.showMessageDialog(this, msg);
-		
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException ex) {
-			Thread.currentThread().interrupt();
-		}
-		
-		Window janelaMsg = SwingUtilities.getWindowAncestor(msg);
-		janelaMsg.setVisible(false);
-		
-	}
-
 	// ----------------------------------------------------------- GETTERS E SETTERS ----------------------------------------------
 
 	public JanelaDeJogo getJanelaDeJogo() {
@@ -290,11 +286,11 @@ public class TelaDePartida extends JPanel {
 		this.janelaDeJogo = janelaDeJogo;
 	}
 
-	public ControladorNovaPartida getControladorPartida() {
+	public ControladorPartida getControladorPartida() {
 		return controladorPartida;
 	}
 
-	public void setControladorPartida(ControladorNovaPartida controladorPartida) {
+	public void setControladorPartida(ControladorPartida controladorPartida) {
 		this.controladorPartida = controladorPartida;
 	}
 

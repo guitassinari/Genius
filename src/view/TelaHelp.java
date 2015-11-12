@@ -12,11 +12,9 @@ import model.Constante;
  * Tela estatica que auxilia o usuario com informações básicas sobre o jogo e seu funcionamento
  *
  */
-public class TelaHelp extends JPanel {
+public class TelaHelp extends Tela {
 
-	private static final String ESC_PRESSIONADO = "esc pressionado";
-	private JanelaDeJogo janelaDeJogo;
-	
+	private static final String ESC_PRESSIONADO = "esc pressionado";	
 	
 	public TelaHelp(JanelaDeJogo janelaDeJogo) {
 		super();
@@ -59,8 +57,5 @@ public class TelaHelp extends JPanel {
 		txtpnORankingS.setBounds(33, 232, 393, 20);
 		add(txtpnORankingS);
 
-		getInputMap(Constante.QUANDO_JANELA_FOCADA).put(KeyStroke.getKeyStroke(Constante.ESC, 0, false),
-				ESC_PRESSIONADO);
-		getActionMap().put(ESC_PRESSIONADO, new EscAction(janelaDeJogo));
 	}
 }

@@ -22,13 +22,13 @@ import view.TelaDePartida;
 
 	private static final long serialVersionUID = 1L;
 	private Canvas botao;
-	private ControladorNovaPartida controladorNovaPartida;
+	private ControladorPartida controladorPartida;
 	private TelaDePartida telaDePartida;
 
-	public BotaoPressionadoPartidaAction(Canvas botao, ControladorNovaPartida controladorNovaPartida, TelaDePartida telaDePartida) {
+	public BotaoPressionadoPartidaAction(Canvas botao, ControladorPartida controladorPartida, TelaDePartida telaDePartida) {
 		super();
 		this.botao = botao;
-		this.controladorNovaPartida = controladorNovaPartida;
+		this.controladorPartida = controladorPartida;
 		this.telaDePartida = telaDePartida;
 	}
 
@@ -66,7 +66,7 @@ import view.TelaDePartida;
 		
 		
 		telaDePartida.piscarBotao(botao, corPiscar);
-		controladorNovaPartida.corPressionada(corBotao);
+		controladorPartida.corPressionada(corBotao);
 	}
 
 	public Canvas getBotao() {
@@ -77,11 +77,11 @@ import view.TelaDePartida;
 		this.botao = botao;
 	}
 
-	public ControladorNovaPartida getControladorNovaPartida() {
-		return controladorNovaPartida;
+	public ControladorPartida getControladorNovaPartida() {
+		return controladorPartida;
 	}
 
-	public void setControladorNovaPartida(ControladorNovaPartida controladorNovaPartida) {
-		this.controladorNovaPartida = controladorNovaPartida;
+	public void setControladorNovaPartida(ControladorPartida controladorNovaPartida) {
+		this.controladorPartida = controladorNovaPartida;
 	}
 }
