@@ -83,9 +83,9 @@ public class ControladorNovaPartida {
 		sequenciaCoresPressionadas.add(corPressionada);
 		
 		int tamanhoSequenciaCoresPressionadas = sequenciaCoresPressionadas.size();
-		Color corCorrespondenteSequenciaPartida = sequenciaCoresPartida.get(tamanhoSequenciaCoresPressionadas-1);
 		
 		if(tamanhoSequenciaCoresPressionadas <= sequenciaCoresPartida.size()){
+			Color corCorrespondenteSequenciaPartida = sequenciaCoresPartida.get(tamanhoSequenciaCoresPressionadas-1);
 			if(corPressionada.equals(corCorrespondenteSequenciaPartida)){
 				if(tamanhoSequenciaCoresPressionadas == sequenciaCoresPartida.size()){
 					partida.incrementarNrPontos();

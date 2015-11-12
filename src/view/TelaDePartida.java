@@ -200,7 +200,7 @@ public class TelaDePartida extends JPanel {
 				
 				botao.setBackground(cor);
 				try {
-					Thread.sleep(100);
+					Thread.sleep(200);
 				} catch (InterruptedException ex) {
 					Thread.currentThread().interrupt();
 				}

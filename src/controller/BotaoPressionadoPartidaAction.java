@@ -3,11 +3,14 @@ package controller;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
+import java.io.File;
 
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.AbstractAction;
 
 import model.Cor;
-import view.JanelaDeJogo;
+import model.EfeitoSonoro;
 import view.TelaDePartida;
 
 /**
@@ -39,12 +42,36 @@ import view.TelaDePartida;
 	public void actionPerformed(ActionEvent arg0) {
 		
 		Color corBotao = botao.getBackground();
-		Color corPiscar = corBotao.equals(Cor.VERMELHO) ? Cor.VERMELHO_FOSCO : 
-			corBotao.equals(Cor.VERDE) ? Cor.VERDE_FOSCO :
-				corBotao.equals(Cor.AZUL) ? Cor.AZUL_FOSCO :
-				Cor.AMARELO_FOSCO;
+		Color corPiscar = Color.white;
+		String audio;
 		
+		
+		if(corBotao.equals(Cor.AMARELO)){
+			corPiscar = Cor.AMARELO_BRILHANTE;
+			audio = EfeitoSonoro.SOM_BOTAO_AMARELO;
+		} else if(corBotao.equals(Cor.AZUL)){
+			corPiscar = Cor.AZUL_BRILHANTE;
+			audio = EfeitoSonoro.SOM_BOTAO_AZUL;
+		} else if(corBotao.equals(Cor.VERDE)){
+			audio = EfeitoSonoro.SOM_BOTAO_VERDE;
+			corPiscar = Cor.VERDE_BRILHANTE;
+		} else {
+			corPiscar = Cor.VERMELHO_BRILHANTE;
+			audio = EfeitoSonoro.SOM_BOTAO_VERMELHO;
+		}
+
+		 try{
+		        Clip clip = AudioSystem.getClip();
+		        clip.open(AudioSystem.getAudioInputStream(new File(audio)));
+		        clip.start();
+		        Thread.sleep(300);
+		        clip.close();
+			 } catch (Exception exc) {
+		        exc.printStackTrace(System.out);
+			 }
 		telaDePartida.piscarBotao(botao, corPiscar);
+		
+
 		controladorNovaPartida.corPressionada(corBotao);
 	}
 
