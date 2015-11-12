@@ -71,6 +71,7 @@ public class ControladorRanking {
 		try {
 			arquivoRanking = new FileInputStream(CAMINHO_ARQUIVO);
 			
+			if(arquivoRanking.available() > 1){
 				ObjectInputStream leitorDeObjetos = new ObjectInputStream(arquivoRanking);
 				Object objeto = leitorDeObjetos.readObject();
 				Object[] arrayObjetos = (Object[])objeto;
@@ -80,11 +81,13 @@ public class ControladorRanking {
 					Partida novaPartida = (Partida)obj;
 					ranking.add(novaPartida);
 				}
+				Collections.sort(ranking);
 				leitorDeObjetos.close();
+			}
 			
 			arquivoRanking.close();
 			
-			Collections.sort(ranking);
+			
 		} catch (FileNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

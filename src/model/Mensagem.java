@@ -12,4 +12,5 @@ public final class Mensagem {
 	public static final String MSG_INSIRA_NOME = "Insira seu nome:";
 	public static final String MSG_SEQUENCIA_CORRETA = "Sequencia correta! Mostrando nova sequencia...";
 	public static final String MSG_SEQUENCIA_INCORRETA = "Sequencia incorreta! Sua pontuação será salva no ranking. Para começar uma nova partida, clique no botão COMEÇAR!";
+	public static final String MSG_RANKING_VAZIO = "Não há registros no Ranking!\nPressione ESC para retornar ao Menu!";
 }

@@ -1,9 +1,11 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Font;
 import java.util.List;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import javax.swing.KeyStroke;
@@ -11,6 +13,8 @@ import javax.swing.KeyStroke;
 import controller.ControladorRanking;
 import controller.EscAction;
 import model.Constante;
+import model.Cor;
+import model.Mensagem;
 import model.Partida;
 
 public class TelaRanking extends JPanel {
@@ -33,38 +37,35 @@ public class TelaRanking extends JPanel {
 		
 		JPanel panel = new JPanel();
 		add(panel, BorderLayout.CENTER);
+		panel.setBackground(Cor.CINZA_ESCURO);
 		panel.setLayout(null);
-
-		JLabel label = new JLabel("1\u00BA");
-		label.setBounds(112, 67, 46, 14);
-		panel.add(label);
-
-		JLabel label_1 = new JLabel("2\u00BA");
-		label_1.setBounds(112, 92, 46, 14);
-		panel.add(label_1);
-
-		JLabel label_2 = new JLabel("3\u00BA");
-		label_2.setBounds(112, 119, 46, 14);
-		panel.add(label_2);
-
-		JLabel label_3 = new JLabel("4\u00BA");
-		label_3.setBounds(112, 144, 46, 14);
-		panel.add(label_3);
-
-		JLabel label_4 = new JLabel("5\u00BA");
-		label_4.setBounds(112, 169, 46, 14);
-		panel.add(label_4);
-
-		if(!ranking.isEmpty()){
+		
+		
+		if(ranking != null && !ranking.isEmpty()){
 			int deslocamentoVertical = 67;
+			int contadorLimite = 0;
 			for(Partida partida : ranking){
+				if(contadorLimite >= Constante.MAX_RANKING){
+					break;
+				} else {
+					contadorLimite++;
+				}
+				
+				JLabel label = new JLabel( (contadorLimite+1) + "\u00BA");
+				label.setBounds(112, deslocamentoVertical, 46, 50);
+				label.setFont(new Font("Segoe UI", Font.PLAIN, 25));
+				panel.add(label);
+				
 				JTextPane textPane = new JTextPane();
-				textPane.setBounds(140, deslocamentoVertical, 204, 20);
+				textPane.setBounds(140, deslocamentoVertical,800, 50);
 				textPane.setText(partida.getNmJogador() + " : " + partida.getNrPontos() + " pontos " + partida.getDtPartida().toString());
+				textPane.setFont(new Font("Segoe UI", Font.PLAIN, 25));
 				panel.add(textPane);
 				
-				deslocamentoVertical += 25;
-			}
+				deslocamentoVertical += 60;
+			} 
+		} else {
+			JOptionPane.showMessageDialog(this, Mensagem.MSG_RANKING_VAZIO);
 		}
 		
 		getInputMap(Constante.QUANDO_JANELA_FOCADA).put(KeyStroke.getKeyStroke(Constante.ESC, 0, false),

@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 
 import model.Constante;
 import model.Cor;
+import model.EfeitoSonoro;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -26,6 +27,7 @@ import javax.swing.SwingConstants;
 
 import controller.BotaoPressionadoMenuAction;
 import controller.EnterPressionadoInserirNomeAction;
+import controller.TocadorDeAudio;
 
 public class TelaMenuPrincipal extends JPanel {
 
@@ -123,11 +125,35 @@ public class TelaMenuPrincipal extends JPanel {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				botao.setBackground(corBotaoPressionado);
+				
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				botao.setBackground(corBotaoPadrao);
+				
+				TocadorDeAudio tocadorDeAudio = new TocadorDeAudio();
+				String caminhoDoAudio;
+				
+				if(corBotaoPadrao.equals(Cor.AMARELO)){
+					janelaDeJogo.mostrarHelp();
+					caminhoDoAudio = EfeitoSonoro.SOM_BOTAO_AMARELO;
+				} else if(corBotaoPadrao.equals(Cor.AZUL)){
+					janelaDeJogo.mostrarRanking();
+					caminhoDoAudio = EfeitoSonoro.SOM_BOTAO_AZUL;
+				} else if(corBotaoPadrao.equals(Cor.VERDE)){
+					caminhoDoAudio = EfeitoSonoro.SOM_BOTAO_VERDE;
+					janelaDeJogo.mostrarInserirNome();
+				} else {
+					caminhoDoAudio = EfeitoSonoro.SOM_BOTAO_VERMELHO;
+					janelaDeJogo.fecharJogo();
+				}
+				
+				
+				tocadorDeAudio.setCaminhoDoAudio(caminhoDoAudio);
+				Thread threadDeAudio = new Thread(tocadorDeAudio);
+				threadDeAudio.run();
+				
 			}
 		});
 		
