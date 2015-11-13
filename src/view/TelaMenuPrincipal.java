@@ -6,8 +6,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Label;
 import java.awt.Rectangle;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -17,16 +15,13 @@ import model.Constante;
 import model.Cor;
 import model.EfeitoSonoro;
 
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JTable;
 import javax.swing.KeyStroke;
 
 import java.awt.Component;
 import javax.swing.SwingConstants;
 
 import controller.BotaoPressionadoMenuAction;
-import controller.EnterPressionadoInserirNomeAction;
 import controller.TocadorDeAudio;
 
 public class TelaMenuPrincipal extends Tela {
@@ -97,13 +92,13 @@ public class TelaMenuPrincipal extends Tela {
 	
 	private void criarBotoes(){
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-		Canvas botaoVermelho = criarBotao(new Rectangle(0, 0, 200, 0), Cor.VERMELHO, Cor.VERMELHO_FOSCO, BorderLayout.WEST, Constante.SETA_ESQUERDA, BOTAO_VERMELHO_PRESSIONADO);	
+		Canvas botaoVermelho = criarBotao(new Rectangle(0, 0, 200, 0), Cor.VERMELHO, Cor.VERMELHO_BRILHANTE, BorderLayout.WEST, Constante.SETA_ESQUERDA, BOTAO_VERMELHO_PRESSIONADO);	
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-		Canvas botaoAmarelo = criarBotao(new Rectangle(0, 0, 200, 0), Cor.AMARELO, Cor.AMARELO_FOSCO, BorderLayout.EAST, Constante.SETA_DIREITA, BOTAO_AMARELO_PRESSIONADO);	
+		Canvas botaoAmarelo = criarBotao(new Rectangle(0, 0, 200, 0), Cor.AMARELO, Cor.AMARELO_BRILHANTE, BorderLayout.EAST, Constante.SETA_DIREITA, BOTAO_AMARELO_PRESSIONADO);	
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-		Canvas botaoVerde = criarBotao(new Rectangle(0, 0, 0, 200), Cor.VERDE, Cor.VERDE_FOSCO, BorderLayout.SOUTH, Constante.SETA_BAIXO, BOTAO_VERDE_PRESSIONADO);	
+		Canvas botaoVerde = criarBotao(new Rectangle(0, 0, 0, 200), Cor.VERDE, Cor.VERDE_BRILHANTE, BorderLayout.SOUTH, Constante.SETA_BAIXO, BOTAO_VERDE_PRESSIONADO);	
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-		Canvas botaoAzul = criarBotao(new Rectangle(0, 0, 0, 200), Cor.AZUL, Cor.AZUL_FOSCO, BorderLayout.NORTH, Constante.SETA_CIMA, BOTAO_AZUL_PRESSIONADO);
+		Canvas botaoAzul = criarBotao(new Rectangle(0, 0, 0, 200), Cor.AZUL, Cor.AZUL_BRILHANTE, BorderLayout.NORTH, Constante.SETA_CIMA, BOTAO_AZUL_PRESSIONADO);
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	}
 

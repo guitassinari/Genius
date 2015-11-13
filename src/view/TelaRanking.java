@@ -6,13 +6,10 @@ import java.awt.Font;
 import java.util.List;
 
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
-import javax.swing.KeyStroke;
 
 import controller.ControladorRanking;
-import controller.EscAction;
 import model.Constante;
 import model.Cor;
 import model.Mensagem;
@@ -20,7 +17,6 @@ import model.Partida;
 
 public class TelaRanking extends Tela {
 
-	private static final String ESC_PRESSIONADO = "esc pressionado";
 	private ControladorRanking controladorRanking;
 
 	public TelaRanking(JanelaDeJogo janelaDeJogo) {
@@ -45,13 +41,14 @@ public class TelaRanking extends Tela {
 			int deslocamentoVertical = 67;
 			int contadorLimite = 0;
 			for(Partida partida : ranking){
+	
 				if(contadorLimite >= Constante.MAX_RANKING){
 					break;
 				} else {
 					contadorLimite++;
 				}
 				
-				JLabel label = new JLabel( (contadorLimite+1) + "\u00BA");
+				JLabel label = new JLabel( (contadorLimite) + "\u00BA");
 				label.setBounds(112, deslocamentoVertical, 46, 50);
 				label.setFont(new Font("Segoe UI", Font.PLAIN, 25));
 				label.setForeground(Color.WHITE);

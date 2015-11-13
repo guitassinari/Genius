@@ -4,25 +4,20 @@ import javax.swing.JPanel;
 
 import model.Constante;
 import model.Mensagem;
-import controller.ControladorPartida;
 import controller.EnterPressionadoInserirNomeAction;
-import controller.EscAction;
 import controller.LimiteCharCampoTexto;
 
 import java.awt.Color;
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.border.LineBorder;
-import javax.swing.InputMap;
 import javax.swing.JButton;
 import java.awt.Rectangle;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -36,8 +31,6 @@ import java.awt.event.MouseEvent;
 public class TelaInserirNome extends Tela {
 
 	private static final String ENTER_PRESSIONADO = "enter pressionado";
-	private static final String ESC_PRESSIONADO = "esc pressionado";
-
 		private JTextField nomeJogador;
 
 	public TelaInserirNome(JanelaDeJogo janelaDeJogo,
@@ -101,7 +94,7 @@ public class TelaInserirNome extends Tela {
 	}
 
 	public boolean nomeVazio() {
-		return nomeJogador.getText().length() < 1;
+		return nomeJogador.getText().trim().isEmpty();
 	}
 
 

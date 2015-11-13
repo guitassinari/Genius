@@ -3,35 +3,24 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Color;
-import java.awt.GridLayout;
+import java.awt.Font;
 import java.awt.Rectangle;
-import java.awt.Window;
-import java.awt.event.KeyAdapter;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionAdapter;
 import java.util.List;
 
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+import javax.swing.JButton;
 import javax.swing.KeyStroke;
-import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
 import controller.BotaoPressionadoPartidaAction;
 import controller.ControladorPartida;
-import controller.EscAction;
 import controller.TocadorDeAudio;
 import model.Constante;
 import model.Cor;
 import model.EfeitoSonoro;
-import model.Mensagem;
-
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.Font;
 /**
  * 
  * Tela de execução de jogo. Aqui é feita a real interação com o jogador e a partida é realizada. Nenhuma real manipulação de objetos
@@ -109,16 +98,16 @@ public class TelaDePartida extends Tela {
 	
 	private void criarBotoes() {
 		// --------------------------------------------------------------------------------------------------------------
-		botaoVermelho = criarBotao(new Rectangle(0, 0, 200, 0), Cor.VERMELHO, Cor.VERMELHO_FOSCO, BorderLayout.WEST,
+		botaoVermelho = criarBotao(new Rectangle(0, 0, 200, 0), Cor.VERMELHO, Cor.VERMELHO_BRILHANTE, BorderLayout.WEST,
 				Constante.SETA_ESQUERDA, BOTAO_VERMELHO_PRESSIONADO);
 		// -------------------------------------------------------------------------------------------------------------------
-		botaoAmarelo = criarBotao(new Rectangle(0, 0, 200, 0), Cor.AMARELO, Cor.AMARELO_FOSCO, BorderLayout.EAST,
+		botaoAmarelo = criarBotao(new Rectangle(0, 0, 200, 0), Cor.AMARELO, Cor.AMARELO_BRILHANTE, BorderLayout.EAST,
 				Constante.SETA_DIREITA, BOTAO_AMARELO_PRESSIONADO);
 		// ----------------------------------------------------------------------------------------------------------------------
-		botaoVerde = criarBotao(new Rectangle(0, 0, 0, 200), Cor.VERDE, Cor.VERDE_FOSCO, BorderLayout.SOUTH,
+		botaoVerde = criarBotao(new Rectangle(0, 0, 0, 200), Cor.VERDE, Cor.VERDE_BRILHANTE, BorderLayout.SOUTH,
 				Constante.SETA_BAIXO, BOTAO_VERDE_PRESSIONADO);
 		// -------------------------------------------------------------------------------------------------------------------------------------------------
-		botaoAzul = criarBotao(new Rectangle(0, 0, 0, 200), Cor.AZUL, Cor.AZUL_FOSCO, BorderLayout.NORTH,
+		botaoAzul = criarBotao(new Rectangle(0, 0, 0, 200), Cor.AZUL, Cor.AZUL_BRILHANTE, BorderLayout.NORTH,
 				Constante.SETA_CIMA, BOTAO_AZUL_PRESSIONADO);
 		// --------------------------------------------------------------------------------------------------------------------------
 	}
@@ -250,15 +239,31 @@ public class TelaDePartida extends Tela {
 						Thread.currentThread().interrupt();
 					}
 					
+					TocadorDeAudio tocadorDeAudio = new TocadorDeAudio();
+					String caminhoDoAudio;
+					
+					
 					if (corBotao.equals(botaoAmarelo.getBackground())) {
 						botaoAmarelo.setBackground(Cor.AMARELO_BRILHANTE);
+						caminhoDoAudio = EfeitoSonoro.SOM_BOTAO_AMARELO;
+
 					} else if (corBotao.equals(botaoVerde.getBackground())) {
 						botaoVerde.setBackground(Cor.VERDE_BRILHANTE);
+						caminhoDoAudio = EfeitoSonoro.SOM_BOTAO_VERDE;
+
 					} else if (corBotao.equals(botaoAzul.getBackground())) {
 						botaoAzul.setBackground(Cor.AZUL_BRILHANTE);
+						caminhoDoAudio = EfeitoSonoro.SOM_BOTAO_AZUL;
+
 					} else {
 						botaoVermelho.setBackground(Cor.VERMELHO_BRILHANTE);
+						caminhoDoAudio = EfeitoSonoro.SOM_BOTAO_VERMELHO;
+
 					}
+						
+					tocadorDeAudio.setCaminhoDoAudio(caminhoDoAudio);
+					Thread threadDeAudio = new Thread(tocadorDeAudio);
+					threadDeAudio.run();
 					
 					try {
 						Thread.sleep(700);
