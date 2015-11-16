@@ -6,14 +6,17 @@ import java.awt.EventQueue;
 import java.awt.GridLayout;
 import java.awt.event.KeyAdapter;
 import java.awt.event.MouseAdapter;
+import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionAdapter;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import controller.ControladorPartida;
 import controller.Principal;
+import model.Mensagem;
 import model.Partida;
 
 /**
@@ -78,6 +81,7 @@ public class JanelaDeJogo {
 		limparConteudoJanela();
 		frame.setContentPane(new TelaDePartida(this, nomeJogador));
 		redesenharConteudoJanela();
+		JOptionPane.showMessageDialog(frame.getContentPane(), Mensagem.MSG_INSTRUCOES_PARTIDA);
 	}
 	
 	public void mostrarHelp(){
@@ -100,6 +104,7 @@ public class JanelaDeJogo {
 	
 	private void limparConteudoJanela() {
 		frame.getContentPane().removeAll();
+		frame.validate();
 	}
 
 	private void redesenharConteudoJanela() {

@@ -12,6 +12,7 @@ import java.awt.event.MouseEvent;
 import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 import javax.swing.SwingWorker;
 
@@ -21,6 +22,7 @@ import controller.TocadorDeAudio;
 import model.Constante;
 import model.Cor;
 import model.EfeitoSonoro;
+import model.Mensagem;
 /**
  * 
  * Tela de execução de jogo. Aqui é feita a real interação com o jogador e a partida é realizada. Nenhuma real manipulação de objetos
@@ -91,8 +93,6 @@ public class TelaDePartida extends Tela {
 			}
 		});
 		add(botaoComecar, BorderLayout.CENTER);
-		
-		//Comportamento do ESC
 		
 	}
 	
