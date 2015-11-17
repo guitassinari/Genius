@@ -40,14 +40,19 @@ public class ControladorRanking {
 	private void escreverRankingNoArquivo(){
 		
 		FileOutputStream arquivoRanking;
+		
 		try {
+			
 			arquivoRanking = new FileOutputStream(CAMINHO_ARQUIVO);
 			
 			ObjectOutputStream escritorDeObjetos = new ObjectOutputStream(arquivoRanking);
+			
 			escritorDeObjetos.writeObject(ranking.toArray());		
+			
 			escritorDeObjetos.close();
 			
 			arquivoRanking.close();
+			
 		} catch (FileNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

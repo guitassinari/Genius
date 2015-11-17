@@ -50,7 +50,6 @@ public class ControladorPartida {
 		sequenciaCoresPartida = new ArrayList<Color>();
 		sequenciaCoresPressionadas = new ArrayList<Color>();
 		this.telaDePartida = telaDePartida;
-		
 	}
 	
 	
@@ -78,7 +77,9 @@ public class ControladorPartida {
 		int tamanhoSequenciaCoresPressionadas = sequenciaCoresPressionadas.size();
 		
 		if(tamanhoSequenciaCoresPressionadas <= sequenciaCoresPartida.size()){
+			
 			Color corCorrespondenteSequenciaPartida = sequenciaCoresPartida.get(tamanhoSequenciaCoresPressionadas-1);
+			
 			if(corPressionada.equals(corCorrespondenteSequenciaPartida)){
 				if(tamanhoSequenciaCoresPressionadas == sequenciaCoresPartida.size()){
 					partida.incrementarNrPontos();

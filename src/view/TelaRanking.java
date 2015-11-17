@@ -3,6 +3,7 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.swing.JLabel;
@@ -37,6 +38,8 @@ public class TelaRanking extends Tela {
 		panel.setLayout(null);
 		
 		
+		SimpleDateFormat formatadorDeData = new SimpleDateFormat("dd/MM/yyyy");
+		
 		if(ranking != null && !ranking.isEmpty()){
 			int deslocamentoVertical = 67;
 			int contadorLimite = 0;
@@ -56,7 +59,7 @@ public class TelaRanking extends Tela {
 				
 				JTextPane textPane = new JTextPane();
 				textPane.setBounds(140, deslocamentoVertical,800, 50);
-				textPane.setText(partida.getNmJogador() + " : " + partida.getNrPontos() + " pontos " + partida.getDtPartida().toString());
+				textPane.setText(partida.getNmJogador() + " : " + partida.getNrPontos() + " pontos " + formatadorDeData.format(partida.getDtPartida()));
 				textPane.setFont(new Font("Segoe UI", Font.PLAIN, 25));
 				textPane.setEditable(false);
 				panel.add(textPane);

@@ -147,25 +147,23 @@ public class TelaDePartida extends Tela {
 				String caminhoDoAudio;
 				
 				if(corBotaoPadrao.equals(Cor.AMARELO)){
-					janelaDeJogo.mostrarHelp();
+					controladorPartida.corPressionada(Cor.AMARELO);
 					caminhoDoAudio = EfeitoSonoro.SOM_BOTAO_AMARELO;
 				} else if(corBotaoPadrao.equals(Cor.AZUL)){
-					janelaDeJogo.mostrarRanking();
+					controladorPartida.corPressionada(Cor.AZUL);
 					caminhoDoAudio = EfeitoSonoro.SOM_BOTAO_AZUL;
 				} else if(corBotaoPadrao.equals(Cor.VERDE)){
+					controladorPartida.corPressionada(Cor.VERDE);
 					caminhoDoAudio = EfeitoSonoro.SOM_BOTAO_VERDE;
-					janelaDeJogo.mostrarInserirNome();
 				} else {
+					controladorPartida.corPressionada(Cor.VERMELHO);
 					caminhoDoAudio = EfeitoSonoro.SOM_BOTAO_VERMELHO;
-					janelaDeJogo.fecharJogo();
 				}
-				
 				
 				tocadorDeAudio.setCaminhoDoAudio(caminhoDoAudio);
 				Thread threadDeAudio = new Thread(tocadorDeAudio);
 				threadDeAudio.run();
 				
-				controladorPartida.corPressionada(corBotaoPadrao);
 			}
 		});
 

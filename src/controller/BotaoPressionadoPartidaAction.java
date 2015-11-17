@@ -46,17 +46,21 @@ import view.TelaDePartida;
 		TocadorDeAudio tocadorDeAudio = new TocadorDeAudio();
 		String caminhoDoAudio;
 		
-		if(corBotao.equals(Cor.AMARELO)){
+		if(corBotao.equals(Cor.AMARELO) || corBotao.equals(Cor.AMARELO_BRILHANTE)){
 			corPiscar = Cor.AMARELO_BRILHANTE;
+			corBotao = Cor.AMARELO;
 			caminhoDoAudio = EfeitoSonoro.SOM_BOTAO_AMARELO;
-		} else if(corBotao.equals(Cor.AZUL)){
+		} else if(corBotao.equals(Cor.AZUL) || corBotao.equals(Cor.AZUL_BRILHANTE)){
 			corPiscar = Cor.AZUL_BRILHANTE;
+			corBotao = Cor.AZUL;
 			caminhoDoAudio = EfeitoSonoro.SOM_BOTAO_AZUL;
-		} else if(corBotao.equals(Cor.VERDE)){
+		} else if(corBotao.equals(Cor.VERDE) || corBotao.equals(Cor.VERDE_BRILHANTE)){
 			corPiscar = Cor.VERDE_BRILHANTE;
+			corBotao = Cor.VERDE;
 			caminhoDoAudio = EfeitoSonoro.SOM_BOTAO_VERDE;
 		} else {
 			corPiscar = Cor.VERMELHO_BRILHANTE;
+			corBotao = Cor.VERMELHO;
 			caminhoDoAudio = EfeitoSonoro.SOM_BOTAO_VERMELHO;
 		}
 
