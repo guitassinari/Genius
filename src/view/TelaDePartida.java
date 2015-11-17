@@ -84,6 +84,7 @@ public class TelaDePartida extends Tela {
 		botaoComecar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
+					JOptionPane.showMessageDialog(botaoComecar, Mensagem.MSG_BOTAO_COMECAR);
 					controladorPartida.comecarPartida();
 			}
 		});

@@ -70,6 +70,7 @@ public class JanelaDeJogo {
 		limparConteudoJanela();
 		frame.setContentPane(new TelaMenuPrincipal(this));
 		redesenharConteudoJanela();
+		JOptionPane.showMessageDialog(frame.getContentPane(), Mensagem.MSG_MENU_INICIAL);
 	}
 
 	/**

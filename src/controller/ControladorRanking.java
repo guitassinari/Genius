@@ -15,44 +15,49 @@ import model.Partida;
 
 /**
  * 
- * Classe responsavel por manipular o ranking e sua leitura e escrita em arquivo externo.
+ * Classe responsavel por manipular o ranking e sua leitura e escrita em arquivo
+ * externo.
  * 
- * @param ranking lista com os atuais melhores. Limite de partidas listadas é definido pela constante MAX_RANKING : {@link Constante#MAX_RANKING} 
- * @param CAMINHO_ARQUIVO caminho do arquivo a ser editado, lido e escrito.
+ * @param ranking
+ *            lista com os atuais melhores. Limite de partidas listadas é
+ *            definido pela constante MAX_RANKING :
+ *            {@link Constante#MAX_RANKING}
+ * @param CAMINHO_ARQUIVO
+ *            caminho do arquivo a ser editado, lido e escrito.
  */
 
 public class ControladorRanking {
 
 	private List<Partida> ranking;
 	private static String CAMINHO_ARQUIVO = "C:\\Users\\Guilherme\\OneDrive\\Conhecimentos\\workspace\\Genius\\bin\\ranking.ser";
-	
+
 	public ControladorRanking() {
 		super();
 		lerRankingDoArquivo();
 	}
-	
-// ----------------------------------------------------	MÉTODOS GERAIS -----------------------------------
-	
+
+	// ---------------------------------------------------- MÉTODOS GERAIS
+	// -----------------------------------
 
 	/**
 	 * Escreve o ranking atual no arquivo.
 	 */
-	private void escreverRankingNoArquivo(){
-		
+	private void escreverRankingNoArquivo() {
+
 		FileOutputStream arquivoRanking;
-		
+
 		try {
-			
+
 			arquivoRanking = new FileOutputStream(CAMINHO_ARQUIVO);
-			
+
 			ObjectOutputStream escritorDeObjetos = new ObjectOutputStream(arquivoRanking);
-			
-			escritorDeObjetos.writeObject(ranking.toArray());		
-			
+
+			escritorDeObjetos.writeObject(ranking.toArray());
+
 			escritorDeObjetos.close();
-			
+
 			arquivoRanking.close();
-			
+
 		} catch (FileNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -60,38 +65,44 @@ public class ControladorRanking {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-
 		}
-		
+
 	}
-	
+
 	/**
 	 * Le o ranking atual do arquivo e ordena por pontuação
 	 */
-	private void lerRankingDoArquivo(){
-		
+	private void lerRankingDoArquivo() {
+
 		FileInputStream arquivoRanking;
-		
+
 		try {
 			arquivoRanking = new FileInputStream(CAMINHO_ARQUIVO);
-			
-			if(arquivoRanking.available() > 1){
-				ObjectInputStream leitorDeObjetos = new ObjectInputStream(arquivoRanking);
-				Object objeto = leitorDeObjetos.readObject();
-				Object[] arrayObjetos = (Object[])objeto;
+
+			if (arquivoRanking.available() > 1) {
 				
+				ObjectInputStream leitorDeObjetos = new ObjectInputStream(arquivoRanking);
+				
+				Object objeto = leitorDeObjetos.readObject();
+				
+				Object[] arrayObjetos = (Object[]) objeto;
+
 				ranking = new ArrayList<Partida>();
-				for(Object obj : arrayObjetos){
-					Partida novaPartida = (Partida)obj;
+				
+				for (Object obj : arrayObjetos) {
+					
+					Partida novaPartida = (Partida) obj;
 					ranking.add(novaPartida);
+				
 				}
+				
 				Collections.sort(ranking);
+				
 				leitorDeObjetos.close();
 			}
-			
+
 			arquivoRanking.close();
-			
-			
+
 		} catch (FileNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -102,48 +113,52 @@ public class ControladorRanking {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
-	
-	
+
 	/**
-	 * Método que testa se uma partida esta entre os tops e, se estiver, adiciona ao ranking, já escrevendo no arquivo
+	 * Método que testa se uma partida esta entre os tops e, se estiver,
+	 * adiciona ao ranking, já escrevendo no arquivo
 	 * 
-	 * @param novaPartida partida a ser inserida no ranking, se for o caso
+	 * @param novaPartida
+	 *            partida a ser inserida no ranking, se for o caso
 	 *
 	 */
-	public void addPartidaRanking(Partida novaPartida){
-		
-		 lerRankingDoArquivo();
-		 
-		 if(ranking != null){
-			 boolean novaPartidaEhTopCinco = false;
-			 Partida partidaMenorPontuacao = novaPartida;
-			 
-			 for(Partida partidaTopCinco : ranking){
-				 if(partidaTopCinco.getNrPontos() < novaPartida.getNrPontos()){
-					 novaPartidaEhTopCinco = true;
-					 if(partidaMenorPontuacao.getNrPontos() < partidaTopCinco.getNrPontos()){
-						 partidaMenorPontuacao = partidaTopCinco;
-					 }
-				 }
-			 }
-			 if(novaPartidaEhTopCinco){
-				if(ranking.size() >= Constante.MAX_RANKING){
+	public void addPartidaRanking(Partida novaPartida) {
+
+		lerRankingDoArquivo();
+
+		if (ranking != null) {
+			boolean novaPartidaEntraNoRanking = false;
+			
+			Partida partidaMenorPontuacao = novaPartida;
+
+			for (Partida partidaDoRanking : ranking) {
+				if (partidaDoRanking.getNrPontos() < novaPartida.getNrPontos()) {
+					novaPartidaEntraNoRanking = true;
+					if (partidaMenorPontuacao.getNrPontos() < partidaDoRanking.getNrPontos()) {
+						partidaMenorPontuacao = partidaDoRanking;
+					}
+				}
+			}
+			
+			if (novaPartidaEntraNoRanking) {
+				if (ranking.size() >= Constante.MAX_RANKING) {
 					ranking.remove(partidaMenorPontuacao);
-			 	}
-				 ranking.add(novaPartida);
-			 }
-		 } else {
-			 ranking = new ArrayList<Partida>();
-			 ranking.add(novaPartida);
-		 }
-		 
-		 escreverRankingNoArquivo();
+				}
+				ranking.add(novaPartida);
+			}
+			
+		} else {
+			ranking = new ArrayList<Partida>();
+			ranking.add(novaPartida);
+		}
+
+		escreverRankingNoArquivo();
 	}
-	
-// ---------------------------------------------------- GETTERS E SETTERS --------------------------------
-	
+
+	// ---------------------------------------------------- GETTERS E SETTERS --------------------------------
+
 	public List<Partida> getRanking() {
 		return ranking;
 	}
