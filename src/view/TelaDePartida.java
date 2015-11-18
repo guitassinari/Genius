@@ -136,28 +136,17 @@ public class TelaDePartida extends Tela {
 			@Override
 			public void mousePressed(MouseEvent arg0) {
 				botao.setBackground(corBotaoPressionado);
-				
-			}
-
-			// Comportamento quando mouse for solto
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				botao.setBackground(corBotaoPadrao);
-				
+			
 				TocadorDeAudio tocadorDeAudio = new TocadorDeAudio();
 				String caminhoDoAudio;
 				
 				if(corBotaoPadrao.equals(Cor.AMARELO)){
-					controladorPartida.corPressionada(Cor.AMARELO);
 					caminhoDoAudio = EfeitoSonoro.SOM_BOTAO_AMARELO;
 				} else if(corBotaoPadrao.equals(Cor.AZUL)){
-					controladorPartida.corPressionada(Cor.AZUL);
 					caminhoDoAudio = EfeitoSonoro.SOM_BOTAO_AZUL;
 				} else if(corBotaoPadrao.equals(Cor.VERDE)){
-					controladorPartida.corPressionada(Cor.VERDE);
 					caminhoDoAudio = EfeitoSonoro.SOM_BOTAO_VERDE;
 				} else {
-					controladorPartida.corPressionada(Cor.VERMELHO);
 					caminhoDoAudio = EfeitoSonoro.SOM_BOTAO_VERMELHO;
 				}
 				
@@ -165,6 +154,24 @@ public class TelaDePartida extends Tela {
 				Thread threadDeAudio = new Thread(tocadorDeAudio);
 				threadDeAudio.run();
 				
+			}
+			
+
+			// Comportamento quando mouse for solto
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				botao.setBackground(corBotaoPadrao);
+				
+				if(corBotaoPadrao.equals(Cor.AMARELO)){
+					controladorPartida.corPressionada(Cor.AMARELO);
+				} else if(corBotaoPadrao.equals(Cor.AZUL)){
+					controladorPartida.corPressionada(Cor.AZUL);
+				} else if(corBotaoPadrao.equals(Cor.VERDE)){
+					controladorPartida.corPressionada(Cor.VERDE);
+				} else {
+					controladorPartida.corPressionada(Cor.VERMELHO);
+				}
+
 			}
 		});
 

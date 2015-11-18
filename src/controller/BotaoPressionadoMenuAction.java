@@ -46,18 +46,24 @@ public class BotaoPressionadoMenuAction extends AbstractAction {
 		
 		if(cor.equals(Cor.VERMELHO)){
 			tocadorDeAudio.setCaminhoDoAudio(EfeitoSonoro.SOM_BOTAO_VERMELHO);
+			executarThreadAudio(tocadorDeAudio);
 			telaMenuPrincipal.fecharJogo();
 		} else if (cor.equals(Cor.AMARELO)){
 			tocadorDeAudio.setCaminhoDoAudio(EfeitoSonoro.SOM_BOTAO_AMARELO);
+			executarThreadAudio(tocadorDeAudio);
 			telaMenuPrincipal.mostrarHelp();
 		} else if (cor.equals(Cor.AZUL)){
 			tocadorDeAudio.setCaminhoDoAudio(EfeitoSonoro.SOM_BOTAO_AZUL);
+			executarThreadAudio(tocadorDeAudio);
 			telaMenuPrincipal.mostrarRanking();
 		} else if (cor.equals(Cor.VERDE)){
 			tocadorDeAudio.setCaminhoDoAudio(EfeitoSonoro.SOM_BOTAO_VERDE);
+			executarThreadAudio(tocadorDeAudio);
 			telaMenuPrincipal.mostrarInserirNome();
 		}
-		
+	}
+	
+	private void executarThreadAudio(TocadorDeAudio tocadorDeAudio){
 		Thread threadDeAudio = new Thread(tocadorDeAudio);
 		threadDeAudio.run();
 	}

@@ -4,6 +4,7 @@ import java.io.File;
 
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.swing.SwingWorker;
 
 /**
  * 
@@ -16,15 +17,28 @@ public class TocadorDeAudio implements Runnable {
 
 	@Override
 	public void run() {
-		try {
-			Clip clip = AudioSystem.getClip();
-			clip.open(AudioSystem.getAudioInputStream(new File(caminhoDoAudio)));
-			clip.start();
-			Thread.sleep(300);
-			clip.close();
-		} catch (Exception exc) {
-			exc.printStackTrace(System.out);
-		}
+		
+		SwingWorker worker = new SwingWorker() {
+
+			@Override
+			protected Void doInBackground() throws Exception {
+				
+				try {
+					Clip clip = AudioSystem.getClip();
+					clip.open(AudioSystem.getAudioInputStream(new File(caminhoDoAudio)));
+					clip.start();
+					Thread.sleep(300);
+					clip.close();
+				} catch (Exception exc) {
+					exc.printStackTrace(System.out);
+				}
+				
+				return null;
+			}
+
+		};
+		worker.execute();
+		
 	}
 
 	public String getCaminhoDoAudio() {

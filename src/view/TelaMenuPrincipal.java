@@ -111,33 +111,38 @@ public class TelaMenuPrincipal extends Tela {
 			public void mousePressed(MouseEvent e) {
 				botao.setBackground(corBotaoPressionado);
 				
+				TocadorDeAudio tocadorDeAudio = new TocadorDeAudio();
+				String caminhoDoAudio;
+				
+				if(corBotaoPadrao.equals(Cor.AMARELO)){
+					caminhoDoAudio = EfeitoSonoro.SOM_BOTAO_AMARELO;
+				} else if(corBotaoPadrao.equals(Cor.AZUL)){
+					caminhoDoAudio = EfeitoSonoro.SOM_BOTAO_AZUL;
+				} else if(corBotaoPadrao.equals(Cor.VERDE)){
+					caminhoDoAudio = EfeitoSonoro.SOM_BOTAO_VERDE;
+				} else {
+					caminhoDoAudio = EfeitoSonoro.SOM_BOTAO_VERMELHO;
+				}
+				
+				tocadorDeAudio.setCaminhoDoAudio(caminhoDoAudio);
+				Thread threadDeAudio = new Thread(tocadorDeAudio);
+				threadDeAudio.run();
+				
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				botao.setBackground(corBotaoPadrao);
 				
-				TocadorDeAudio tocadorDeAudio = new TocadorDeAudio();
-				String caminhoDoAudio;
-				
 				if(corBotaoPadrao.equals(Cor.AMARELO)){
 					janelaDeJogo.mostrarHelp();
-					caminhoDoAudio = EfeitoSonoro.SOM_BOTAO_AMARELO;
 				} else if(corBotaoPadrao.equals(Cor.AZUL)){
 					janelaDeJogo.mostrarRanking();
-					caminhoDoAudio = EfeitoSonoro.SOM_BOTAO_AZUL;
 				} else if(corBotaoPadrao.equals(Cor.VERDE)){
-					caminhoDoAudio = EfeitoSonoro.SOM_BOTAO_VERDE;
 					janelaDeJogo.mostrarInserirNome();
 				} else {
-					caminhoDoAudio = EfeitoSonoro.SOM_BOTAO_VERMELHO;
 					janelaDeJogo.fecharJogo();
 				}
-				
-				
-				tocadorDeAudio.setCaminhoDoAudio(caminhoDoAudio);
-				Thread threadDeAudio = new Thread(tocadorDeAudio);
-				threadDeAudio.run();
 				
 			}
 		});
