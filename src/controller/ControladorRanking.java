@@ -37,7 +37,6 @@ public class ControladorRanking {
 	}
 
 	// ---------------------------------------------------- MÉTODOS GERAIS
-	// -----------------------------------
 
 	/**
 	 * Escreve o ranking atual no arquivo.
@@ -70,7 +69,7 @@ public class ControladorRanking {
 	}
 
 	/**
-	 * Le o ranking atual do arquivo e ordena por pontuação
+	 * Le o ranking atual do arquivo e ordena por pontuação, da maior para a menor
 	 */
 	private void lerRankingDoArquivo() {
 
@@ -117,7 +116,7 @@ public class ControladorRanking {
 	}
 
 	/**
-	 * Método que testa se uma partida esta entre os tops e, se estiver,
+	 * Método que testa se uma partida esta entre as melhores e, se estiver,
 	 * adiciona ao ranking, já escrevendo no arquivo
 	 * 
 	 * @param novaPartida
@@ -126,31 +125,32 @@ public class ControladorRanking {
 	 */
 	public void addPartidaRanking(Partida novaPartida) {
 
+		//Recebe o ranking ordenado por pontuação, da maior para a menor
 		lerRankingDoArquivo();
 
-		if (ranking != null) {
-			boolean novaPartidaEntraNoRanking = false;
+		//Realiza testes para saber se a novaPartida deve estar no ranking
+		boolean partidaEstaEntreMelhores = false;		
+		if (ranking != null) {	
 			
-			Partida partidaMenorPontuacao = novaPartida;
-
-			for (Partida partidaDoRanking : ranking) {
-				if (partidaDoRanking.getNrPontos() < novaPartida.getNrPontos()) {
-					novaPartidaEntraNoRanking = true;
-					if (partidaMenorPontuacao.getNrPontos() < partidaDoRanking.getNrPontos()) {
-						partidaMenorPontuacao = partidaDoRanking;
-					}
-				}
-			}
-			
-			if (novaPartidaEntraNoRanking) {
-				if (ranking.size() >= Constante.MAX_RANKING) {
+			if(ranking.size() >= Constante.MAX_RANKING){
+				
+				Partida partidaMenorPontuacao = ranking.get(ranking.size()-1);
+				
+				if (novaPartida.getNrPontos() > partidaMenorPontuacao.getNrPontos()) {
 					ranking.remove(partidaMenorPontuacao);
+					partidaEstaEntreMelhores = true;
 				}
-				ranking.add(novaPartida);
+				
+			} else {
+				partidaEstaEntreMelhores = true;
 			}
 			
 		} else {
 			ranking = new ArrayList<Partida>();
+			partidaEstaEntreMelhores = true;
+		}
+		
+		if(partidaEstaEntreMelhores){
 			ranking.add(novaPartida);
 		}
 

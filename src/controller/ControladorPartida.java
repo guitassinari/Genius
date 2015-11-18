@@ -77,7 +77,6 @@ public class ControladorPartida {
 		int tamanhoSequenciaCoresPressionadas = sequenciaCoresPressionadas.size();
 		
 		if(tamanhoSequenciaCoresPressionadas <= sequenciaCoresPartida.size()){
-			
 			Color corCorrespondenteSequenciaPartida = sequenciaCoresPartida.get(tamanhoSequenciaCoresPressionadas-1);
 			
 			if(corPressionada.equals(corCorrespondenteSequenciaPartida)){

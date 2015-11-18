@@ -16,4 +16,7 @@ public final class Mensagem {
 	public static final String MSG_INSTRUCOES_PARTIDA = "Utilize as teclas direcionais do teclado para interagir com as cores. \nPressione o botão central COMEÇAR para iniciar/reiniciar a partida";
 	public static final String MSG_BOTAO_COMECAR = "Uma nova partida foi iniciada!\nBoa Sorte!";
 	public static final String MSG_MENU_INICIAL = "Clique nas cores para selecionar, ou pressione os botoes direcionais do teclado!";
+	public static final String MSG_TELA_INSERIR_NOME = "Insira seu nome no campo te texto cinza e aperte enter ou clique no botao COMEÇAR PARTIDA.";
+	public static final String MSG_TITULO = "GENIUS! - Guilherme Tassinari e Caroline Knorr - UFRGS - 2015";
+	public static final String MSG_ERRO = "Ops! Algo estranho ocorreu!\nContate o programador e desculpe pelo incoveniente!";
 }

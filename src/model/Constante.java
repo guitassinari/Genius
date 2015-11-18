@@ -19,4 +19,5 @@ public final class Constante {
 	public static final int ENTER = KeyEvent.VK_ENTER;
 	public static final int ESC = KeyEvent.VK_ESCAPE;
 	public static final int MAX_RANKING = 5;
+	public static final int MAX_CHAR_NOME = 15;
 }

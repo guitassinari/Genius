@@ -7,7 +7,7 @@ import javax.sound.sampled.Clip;
 
 /**
  * 
- * Classe responsável por tocar qualquer tipo de audio em nova thread
+ * Classe responsável por tocar qualquer tipo de audio através de uma nova thread
  *
  */
 public class TocadorDeAudio implements Runnable {

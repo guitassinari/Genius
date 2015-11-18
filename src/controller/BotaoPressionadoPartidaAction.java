@@ -46,6 +46,9 @@ import view.TelaDePartida;
 		TocadorDeAudio tocadorDeAudio = new TocadorDeAudio();
 		String caminhoDoAudio;
 		
+		/*As cores *_BRILHANTE são testadas para os casos em que o usuário pressionou rapidamente os botões e 
+		 * acaba trazendo a cor enquanto o mesmo está piscando
+		 */
 		if(corBotao.equals(Cor.AMARELO) || corBotao.equals(Cor.AMARELO_BRILHANTE)){
 			corPiscar = Cor.AMARELO_BRILHANTE;
 			corBotao = Cor.AMARELO;
@@ -68,8 +71,8 @@ import view.TelaDePartida;
 		Thread threadDeAudio = new Thread(tocadorDeAudio);
 		threadDeAudio.run();
 		
-		
 		telaDePartida.piscarBotao(botao, corPiscar);
+		
 		controladorPartida.corPressionada(corBotao);
 	}
 

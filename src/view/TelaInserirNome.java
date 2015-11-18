@@ -57,12 +57,14 @@ public class TelaInserirNome extends Tela {
 		setBackground(Color.DARK_GRAY);
 		setLayout(new BorderLayout(0, 0));
 
+		//Titulo da tela
 		JLabel labelInsiraSeuNome = new JLabel(Mensagem.MSG_INSIRA_NOME);
 		labelInsiraSeuNome.setForeground(Color.WHITE);
 		labelInsiraSeuNome.setHorizontalAlignment(SwingConstants.CENTER);
 		labelInsiraSeuNome.setFont(new Font("Segoe UI", Font.PLAIN, 50));
 		add(labelInsiraSeuNome, BorderLayout.NORTH);
 
+		//Campo para inserção do nome do jogador
 		nomeJogador = new JTextField();
 		labelInsiraSeuNome.setLabelFor(nomeJogador);
 		nomeJogador.setBorder(new LineBorder(Color.BLACK, 100));
@@ -72,14 +74,17 @@ public class TelaInserirNome extends Tela {
 		nomeJogador.setHorizontalAlignment(SwingConstants.CENTER);
 		add(nomeJogador, BorderLayout.CENTER);
 		nomeJogador.setColumns(10);
-		nomeJogador.setDocument(new LimiteCharCampoTexto(15));
+		//Define o limite de characteres do campo de nome
+		nomeJogador.setDocument(new LimiteCharCampoTexto(Constante.MAX_CHAR_NOME));
 
+		//Botao inferior para começar nova partida.
 		JButton botaoIniciarPartida = new JButton(Mensagem.MSG_INICIAR_PARTIDA);
 		botaoIniciarPartida.setBounds(new Rectangle(0, 0, 200, 0));
 		botaoIniciarPartida.setFont(new Font("Segoe UI", Font.BOLD, 20));
 		botaoIniciarPartida.setBackground(Color.RED);
 		botaoIniciarPartida.setForeground(Color.WHITE);
 		add(botaoIniciarPartida, BorderLayout.SOUTH);
+		//Comportamento do mouse
 		botaoIniciarPartida.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -90,6 +95,8 @@ public class TelaInserirNome extends Tela {
 				}
 			}
 		});
+		
+		//Comportamento da tecla Enter
 		defineComportamentoTecla(Constante.QUANDO_JANELA_FOCADA, ENTER_PRESSIONADO, janelaDeJogo, Constante.ENTER, false);
 	}
 

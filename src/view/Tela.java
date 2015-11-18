@@ -7,6 +7,12 @@ import javax.swing.KeyStroke;
 import controller.EscAction;
 import model.Constante;
 
+/**
+ * 
+ * Superclasse extendida por todas as Telas. Possui o comportamento da tecla Esc para retornar ao menu principal,
+ * atributo JanelaDejogo e métodos para transição entre telas.
+ *
+ */
 public class Tela extends JPanel {
 
 	private static final String ESC_PRESSIONADO = "esc pressionado";

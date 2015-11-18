@@ -56,6 +56,7 @@ public class JanelaDeJogo {
 	private void inicializar() {
 		frame = new JFrame();
 		limparConteudoJanela();
+		frame.setTitle(Mensagem.MSG_TITULO);
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		abrirJanela();
@@ -95,6 +96,7 @@ public class JanelaDeJogo {
 		limparConteudoJanela();
 		frame.setContentPane(new TelaInserirNome(this));
 		redesenharConteudoJanela();
+		JOptionPane.showMessageDialog(frame.getContentPane(), Mensagem.MSG_TELA_INSERIR_NOME);
 	}
 
 	public void mostrarRanking(){
